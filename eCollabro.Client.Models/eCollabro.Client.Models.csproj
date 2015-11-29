@@ -55,14 +55,10 @@
     <Compile Include="ESB\AppSchedulerModel.cs" />
     <Compile Include="ESB\ESBAppModel.cs" />
     <Compile Include="Content\AnnouncementModel.cs" />
-    <Compile Include="Store\OrderCartItemModel.cs" />
-    <Compile Include="Store\OrderCartModel.cs" />
-    <Compile Include="Store\ProductCategoryModel.cs" />
     <Compile Include="Content\ContentPageCategoryModel.cs" />
     <Compile Include="Content\BlogCategoryModel.cs" />
     <Compile Include="Content\BlogModel.cs" />
     <Compile Include="Content\ContentCommentModel.cs" />
-    <Compile Include="Store\ProductModel.cs" />
     <Compile Include="Core\AccountViewModel.cs" />
     <Compile Include="Content\ContentPageModel.cs" />
     <Compile Include="Content\DocumentModel.cs" />
