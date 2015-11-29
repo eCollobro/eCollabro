@@ -1,0 +1,56 @@
+﻿@using eCollabro.Client.Models.Workflow;
+@using eCollabro.Client.Models.Core;
+*
+
+@using eCollabro.Web.Base;
+@model WorkflowCommentModel
+@if (!Request.IsAjaxRequest())
+{
+    <script type="text/javascript" src="~/ViewScripts/Workflow/WorkflowComments.js"></script>
+}
+
+<div id="divWorkflowComments" ng-controller="WorkflowCommentsController" ng-init="Initialize('@Model.Context',@Model.ContextId)">
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", ButtonText = "Refresh", Icon = "refresh", Method = "LoadWorkflowComments()" });
+        pageButtons.Add(new PageButton { Id = "btnAdd", ButtonText = "Add", Icon = "plus", Method = "AddComment()" });
+  
+     }
+    
+    
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "WorkflowComments", PageTitle = "Workflow Comments",pageButtons=pageButtons })
+    <div class="modal fade" id="dlgAddComment">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Add Comments</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="divAddCommentModalSummary"></div>
+                    <textarea class="form-control" rows="4" cols="200" id="txtComments"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="SaveComment()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div id="divSummaryMessageAddComment"></div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Comments</div>
+        <div class="panel-body">
+            <div style="height:300px;overflow:auto">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="taskComment in WorkflowComments">
+                        <span class="glyphicon glyphicon-user"></span> {{taskComment.CreatedBy}} ({{taskComment.TimeInterval}}) : <span class="glyphicon glyphicon-comment"></span> {{taskComment.Comment}}
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+

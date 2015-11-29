@@ -1,0 +1,84 @@
+﻿@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model EmailConfigurationModel
+@if (!Request.IsAjaxRequest())
+{
+    <script type="text/javascript" src="~/app/controllers/setup/emailConfiguration.js"></script>
+}
+<div id="divEmailConfiguration" ng-controller="emailConfigurationController" ng-init="loadEmailConfiguration()">
+    @Html.Partial("_PageHeader", new PageHeaderModel
+{
+    ViewId = "EmailConfiguration",
+    PageTitle = "Email Configuration",
+    ValidateForm = true
+})
+    @using (Html.BeginForm("EmailConfiguration", "setup", FormMethod.Post, new { role = "form", id = "frmEmailConfiguration", @class = "form-horizontal" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <div ng-model="EmailConfiguration">
+            <div class="form-group">
+                @Html.LabelFor(m => m.DefaultSenderEmail, new { @class = "col-md-2 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.DefaultSenderEmail, new { ng_model = "emailConfiguration.DefaultSenderEmail", @class = "form-control", maxlength = "100" })
+                    @Html.ValidationMessageFor(m => m.DefaultSenderEmail)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.HostName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.HostName, new { ng_model = "emailConfiguration.HostName", @class = "form-control", maxlength = "50" })
+                    @Html.ValidationMessageFor(m => m.HostName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PortNumber, new { @class = "col-md-2 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.PortNumber, new { ng_model = "emailConfiguration.PortNumber", @class = "form-control", maxlength = "50" })
+                    @Html.ValidationMessageFor(m => m.PortNumber)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.EnableSSL, new { ng_model = "emailConfiguration.EnableSSL" })
+                        @Html.LabelFor(m => m.EnableSSL)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.RequireCredentials, new { ng_model = "emailConfiguration.RequireCredentials" })
+                        @Html.LabelFor(m => m.RequireCredentials)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="emailConfiguration.RequireCredentials">
+                @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.Username, new { ng_model = "emailConfiguration.Username", @class = "form-control", maxlength = "50" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+            <div class="form-group" ng-show="emailConfiguration.RequireCredentials">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-5">
+                    @Html.PasswordFor(m => m.Password, new { ng_model = "emailConfiguration.Password", @class = "form-control", maxlength = "50" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <button type="button" class="btn btn-primary" ng-click="saveEmailConfiguration()">Save</button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+

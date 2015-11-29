@@ -1,0 +1,43 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model BlogCategoryModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+}
+@Scripts.Render("~/bundles/blog")
+<div id="placeHolderBlogs"></div>
+<div id="divBlogs" ng-controller="blogsController" ng-init="initialize(@Model.BlogCategoryId,'@canAdd','@canEdit','@canDelete')">
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass="btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadBlogs()" });
+        pageButtons.Add(new PageButton { Id = "btnBlogCategories", CssClass="btn btn-success", ButtonText = "Blog Categories", Icon = "th-list", Method = "blogCategories()" });
+        if (canAdd)
+        {
+            pageButtons.Add(new PageButton { Id = "btnAdd", ButtonText = "Add Blog", CssClass="btn btn-success", Icon = "plus", Method = "openBlog(0," + Model.BlogCategoryId + ")" });
+        }
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "Blogs", PageTitle = "Blogs - {{blogCategory.BlogCategoryName}}", PageButtons = pageButtons })
+    <table style="width:100%" class="table table-striped table-bordered" id="tblBlogs" cellspacing="0">
+        <thead>
+            <tr>
+                @if (canAdd || canEdit || canDelete) // Contributor
+                {
+                    <th>Id #</th>
+                    <th style="width:400px">Title</th>
+                    <th>Active</th>
+                    <th>Approved</th>
+                    <th>Action</th>
+                }
+                else
+                {
+                    <th>Title</th>
+                }
+            </tr>
+        </thead>
+    </table>
+</div>

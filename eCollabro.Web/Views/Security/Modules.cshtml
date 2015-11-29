@@ -1,0 +1,117 @@
+﻿@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model IEnumerable<ModuleModel>
+<script type="text/javascript">
+    $(document).ready(function () {
+        registerOpenAjaxForm("#btnAdd", "formtarget", processModulesGetResponse);
+    });
+
+    function onDataBound(arg) {
+        registerOpenAjaxForm('.ajaxLink', "href", processModulesGetResponse);
+    }
+
+    function processModulesGetResponse(ajaxResponse) {
+        if (ajaxResponse.ResultStatus != null) {
+            if (ajaxResponse.ResultStatus == 4) // not authorized
+            {
+                location.href = "/account/login?ReturnUrl=%2fsecurity%2fmodules";
+            }
+            else {
+                showMessage("divSummaryMessageModules", ajaxResponse.Message, "danger");
+            }
+        }
+        else {
+            $("#divContainerModules").hide();
+            $("#placeHolderModules").html(ajaxResponse);
+        }
+    }
+
+    function onDataBoundChild(arg) {
+        $('.ajaxLink').click(function () {
+            var moduleId = $(this).attr("moduleid");
+            $.ajax({
+                url: $(this).attr("href"),
+                type: "GET",
+                cache: false,
+                async: false,
+                data: {},
+                success: function (ajaxResponse) {
+                    processModulesGetResponse(ajaxResponse);
+                    if(moduleId) // Add Feature Mode
+                    {
+                        $("#ModuleId").val(moduleId);
+                    }
+                },
+                error: function () {
+                    alert('@ResourceMessages.TechnicalErrorMsg');
+                }
+            });
+            return false;
+        });
+    }
+
+   function deleteModuleFeature(ID) {
+        var res = confirm('@ResourceMessages.ConfirmDialogMsg')
+        if (res == true) {
+            $.ajax({
+                url: "/security/DeleteFeature/" + ID,
+                success: function (result) {
+
+                    if (result.ResultStatus == "1") //"Success")
+                    {
+                        ShowModules(result.Message);
+                    }
+                },
+                error: function (data) { alert('@ResourceMessages.TechnicalErrorMsg'); }
+            });
+        }
+    }
+
+
+
+    function deleteModule(ID) {
+        var res = confirm('@ResourceMessages.ConfirmDialogMsg')
+        if (res == true) {
+            $.ajax({
+                url: "/security/DeleteModule/" + ID,
+                success: function (result) {
+
+                    if (result.ResultType == "1") //"Success")
+                    {
+                        ShowModules(result.Message);
+                    }
+                },
+                error: function (data) { alert('@ResourceMessages.TechnicalErrorMsg'); }
+            });
+        }
+    }
+
+    function ShowModules(summaryMessage) {
+        $("#divContainerModules").show();
+        if (summaryMessage != "") {
+            showMessage("divSummaryMessageModules", summaryMessage, "success");
+        }
+        refreshGrid("ModulesGrid");
+        $("#placeHolderModules").html("");
+    }
+    var expandedRow;
+    function detailExpand(e) {
+        // Only one open at a time
+        if (expandedRow != null && expandedRow[0] != e.masterRow[0]) {
+            //grid.collapseRow(expandedRow);
+
+            this.collapseRow(this.tbody.find(' > tr.k-master-row').not(e.masterRow));
+        }
+        expandedRow = e.masterRow;
+    }
+
+
+</script>
+
+@using (Html.BeginView(new ViewParameters { ViewId = "Modules", ViewTitle = "Manage Modules" }))
+{
+
+    <button formtarget="/security/ManageModule" type="button" class="btn-sm btn-primary" id="btnAdd"><span class="glyphicon glyphicon-plus"></span>Add Module</button>
+   
+}
+

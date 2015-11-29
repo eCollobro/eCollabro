@@ -1,0 +1,14 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model ContentPageModel
+@Scripts.Render("~/bundles/contentpage")
+<div id="divContentPage" ng-controller="viewContentPageController" ng-init="initialize(@Model.ContentPageId)">
+
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ContentPage", PageTitle = "{{contentPage.ContentPageTitle}}" })
+    <p ng-show="isVisible">
+        <div id="divContentPageContent"></div>
+    </p>
+</div>
+@Html.Partial("~/Areas/eCollabro.Web.Content/Views/ContentComment/Index.cshtml", new ContentCommentModel { ContextId = (int)ContextEnum.ContentPage, ContextContentId = Model.ContentPageId })

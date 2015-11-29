@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{90F35875-7840-4A77-9BFB-F9B577176792}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eCollabro.Service.DataContracts</RootNamespace>
+    <AssemblyName>eCollabro.Service.DataContracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseServiceRequest.cs" />
+    <Compile Include="Content\AnnouncementDC.cs" />
+    <Compile Include="Content\BlogDC.cs" />
+    <Compile Include="Content\ContentCommentDataDC.cs" />
+    <Compile Include="Content\ContentPageCategoryDC.cs" />
+    <Compile Include="Content\BlogCategoryDC.cs" />
+    <Compile Include="ESB\ESBAppDC.cs" />
+    <Compile Include="Content\ContentCommentDC.cs" />
+    <Compile Include="Content\ContentCommentRequestDC.cs" />
+    <Compile Include="Core\EmailConfigurationDC.cs" />
+    <Compile Include="Core\FeaturePermissionDC.cs" />
+    <Compile Include="Core\FeatureSettingDC.cs" />
+    <Compile Include="Core\SiteConfigurationDC.cs" />
+    <Compile Include="Core\SiteContentSettingDC.cs" />
+    <Compile Include="Core\UserFeaturePermissionDC.cs" />
+    <Compile Include="ServiceParameters.cs" />
+    <Compile Include="Workflow\UserTasksRequestDC.cs" />
+    <Compile Include="Workflow\WorkflowCommentRequestDC.cs" />
+    <Compile Include="Content\ContentPageDC.cs" />
+    <Compile Include="Content\DocumentDC.cs" />
+    <Compile Include="Content\DocumentLibraryDC.cs" />
+    <Compile Include="Content\ImageGalleryDC.cs" />
+    <Compile Include="Content\ImageDC.cs" />
+    <Compile Include="Core\ChangePasswordDC.cs" />
+    <Compile Include="Core\NavigationDC.cs" />
+    <Compile Include="Core\ModuleDC.cs" />
+    <Compile Include="Core\ModuleFeatureDC.cs" />
+    <Compile Include="Core\UserTokenVerificationDC.cs" />
+    <Compile Include="Core\SiteRoleDC.cs" />
+    <Compile Include="Core\AddRoleFeaturesRequest.cs" />
+    <Compile Include="Core\SaveSiteFeaturesRequest.cs" />
+    <Compile Include="Core\ResetPasswordRequest.cs" />
+    <Compile Include="Core\RoleFeatures.cs" />
+    <Compile Include="ServiceResponse.cs" />
+    <Compile Include="Core\SiteCollectionAdminDC.cs" />
+    <Compile Include="Core\UserDetailDC.cs" />
+    <Compile Include="Core\RegisterDC.cs" />
+    <Compile Include="Core\FeatureDC.cs" />
+    <Compile Include="Core\NavigationTypeDC.cs" />
+    <Compile Include="IBaseServiceRequest.cs" />
+    <Compile Include="IBaseServiceResponse.cs" />
+    <Compile Include="Core\LanguageDC.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\RoleDC.cs" />
+    <Compile Include="Core\SiteDC.cs" />
+    <Compile Include="Core\SiteFeatures.cs" />
+    <Compile Include="Core\SiteRoleFeaturesRequest.cs" />
+    <Compile Include="Core\SiteRoleFeaturesResponse.cs" />
+    <Compile Include="Core\AuthenticateUserRequest.cs" />
+    <Compile Include="Workflow\WorkflowCommentDC.cs" />
+    <Compile Include="Workflow\UserTaskDC.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,43 @@
+﻿@using eCollabro.Client.Models.Store;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model ProductModel
+@Scripts.Render("~/bundles/product")
+<div id="divProductHome" ng-controller="productHomeController" ng-init="initialize()">
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ProductHome", PageTitle = "Products" })
+
+    <div class="col-md-8">
+        <div class="panel panel-default">t
+            <!-- Default panel contents -->
+            <div class="panel-heading">Recent Products <span class="badge">{{recentProducts.length}}</span></div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="product in recentProducts">
+                        <h4 class="list-group-item-heading"><a href="/store/product/product/{{product.ProductId}}">{{product.ProductTitle}}</a></h4>
+                        <p class="list-group-item-text"> {{product.ProductDescription}}</p>
+                    </li>
+                </ul>
+                <div ng-show="recentProducts.length==0" class="text-info">There are no records to show.</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div style="min-height:40px" class="col-md-3">
+        <div class="row">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Product Categories <span class="badge">{{productCategories.length}}</span></div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="productCategory in productCategories">
+                            <span class="badge">{{productCategory.NumberOfProducts}}</span>
+                            <a href="/store/product/products/{{productCategory.ProductCategoryId}}">{{productCategory.ProductCategoryName}}</a>
+                        </li>
+                    </ul>
+                    <div ng-show="productCategories.length==0" class="text-info">There are no records to show.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

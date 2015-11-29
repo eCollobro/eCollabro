@@ -1,0 +1,68 @@
+﻿@using eCollabro.Client.Models.Store;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Common;
+@using System.Web.Optimization;
+@using eCollabro.Web.Base;
+@model ProductCategoryModel
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/product")
+}
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+
+    List<PageButton> pageButtons = new List<PageButton>();
+    pageButtons.Add(new PageButton { Id = "btnProductCategories", ButtonText = "Product Categories", HideOnFooter = true, CssClass = "btn btn-success", Icon = "th-list", Method = "openProductCategories()" });
+    if ((canEdit && !Model.ProductCategoryId.Equals(0)) || (canAdd && Model.ProductCategoryId.Equals(0)))
+    {
+        pageButtons.Add(new PageButton { Id = "btnSave", ButtonText = "Save", HideOnHeader = true, CssClass = "btn btn-primary", Icon = "floppy-disk", Method = "saveProductCategory()" });
+    }
+}
+<div id="divProductCategory" ng-controller="productCategoryController" ng-init="loadProductCategory(@Model.ProductCategoryId)">
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ProductCategory", PageTitle = "Product Category", ValidateForm = true, PageButtons = pageButtons })
+    @using (Html.BeginForm("ProductCategory", "ProductCategory", FormMethod.Post, new { role = "form", id = "frmProductCategory", @class = "form-horizontal" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductCategoryName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.ProductCategoryName, new { ng_model = "productCategory.ProductCategoryName", @class = "form-control", maxlength = "50" })
+                @Html.ValidationMessageFor(m => m.ProductCategoryName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ProductCategoryDescription, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextAreaFor(m => m.ProductCategoryDescription, new { ng_model = "productCategory.ProductCategoryDescription", @class = "form-control", maxlength = "255" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.IsActive, new { ng_model = "productCategory.IsActive" })
+                    @Html.LabelFor(m => m.IsActive)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.IsAnomynousAccess, new { ng_model = "productCategory.IsAnomynousAccess" })
+                    @Html.LabelFor(m => m.IsAnomynousAccess)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            @Html.Partial("_PageFooter", new PageFooterModel
+                {
+                    PageButtons = pageButtons
+                })
+        </div>
+    }
+</div>

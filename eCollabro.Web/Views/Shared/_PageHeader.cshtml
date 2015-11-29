@@ -1,0 +1,68 @@
+﻿@using eCollabro.Client.Models.Core;
+@model PageHeaderModel
+@using eCollabro.Web.Base;
+@{
+    var divSummary = "divSummaryMessage" + Model.ViewId;
+    var formId = "#frm" + Model.ViewId;
+    ControllerMessage message = null;
+    if (ViewBag.Message != null)
+    {
+        message = ViewBag.Message;
+    }
+    else if (TempData["Message"] != null)
+    {
+        message = (ControllerMessage)TempData["Message"];
+    }
+    var documentReadyScript = string.Empty;
+    if (message != null)
+    {
+        if (message.MessageType == ControllerMessageType.BusinessException)
+        {
+            documentReadyScript = string.Format("showMessage('{0}','{1}','danger');", divSummary, message.Message);
+        }
+        else if (message.MessageType == ControllerMessageType.CriticalException)
+        {
+            documentReadyScript = string.Format("showException('{0}',500, '','');", message.Message);
+        }
+        else
+        {
+            documentReadyScript = string.Format("showMessage('{0}', '{1}', 'info');", divSummary, message.Message);
+        }
+    }
+    if (Model.ValidateForm)
+    {
+        documentReadyScript += string.Format("$.validator.unobtrusive.parse($('{0}'));", formId);
+    }
+}
+@if (!string.IsNullOrEmpty(documentReadyScript))
+{
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            @Html.Raw(System.Web.HttpUtility.HtmlDecode(@documentReadyScript))
+        });
+    </script>
+}
+<div class='row'>
+    <div class="col-md-5"><h3>@Model.PageTitle</h3></div>       
+    <div class="col-md-7">
+        <h3 class="pull-right">
+            @if (Model.PageButtons != null)
+            {
+                foreach (PageButton pageButton in Model.PageButtons.Where(qry=>qry.HideOnHeader.Equals(false)).ToList())
+                {
+                    if (string.IsNullOrEmpty(pageButton.CssClass))
+                    {
+                        pageButton.CssClass = "btn btn-primary";
+                    }
+                    <button type="button" class="@pageButton.CssClass" id="@pageButton.Id" ng-click="@pageButton.Method"><span class="glyphicon glyphicon-@pageButton.Icon"></span> @pageButton.ButtonText</button>
+                }
+            }
+
+        </h3>
+    </div>
+</div>
+@if (!string.IsNullOrEmpty(Model.PageTitle))
+{
+    <hr />
+}
+<div id='@divSummary'></div>

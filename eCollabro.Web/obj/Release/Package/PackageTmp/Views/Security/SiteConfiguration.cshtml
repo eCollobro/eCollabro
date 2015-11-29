@@ -1,0 +1,87 @@
+﻿@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Common;
+@using eCollabro.Web.Base;
+@model SiteConfigurationModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+}
+@if (!Request.IsAjaxRequest())
+{
+    <script type="text/javascript" src="~/app/controllers/site/siteConfiguration.js"></script>
+}
+<div id="divSiteConfiguration" ng-controller="siteConfigurationController" ng-init="initialize()">  
+    <br />
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass = "btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadSiteConfiguration()" });
+        if (canEdit)
+        {
+            pageButtons.Add(new PageButton { Id = "btnSave", ButtonText = "Save", Icon = "floppy-disk", Method = "saveSiteConfiguration()" });
+        }
+    }
+    @Html.Partial("_PanelHeader", new PageHeaderModel { ViewId = "SiteConfiguration", PageTitle = "Site Configuration", PageButtons = pageButtons })
+    <div class="form-group">
+        <div class="checkbox">
+            @Html.CheckBoxFor(m => m.AllowRegistration, new { ng_model = "siteConfiguration.AllowRegistration" })
+            @Html.LabelFor(m => m.AllowRegistration)
+        </div>
+    </div>
+    <div ng-show="siteConfiguration.AllowRegistration" class="form-group">
+        @Html.LabelFor(m => m.RegistrationDefaultRoleId)
+        <select data-ng-model="selectedRole" ng-options="role.RoleName for role in roles" class="form-control" ng-change="updateRole()"></select>
+    </div>
+    <div class="form-group" ng-show="siteConfiguration.AllowRegistration">
+        <div class="checkbox">
+            @Html.CheckBoxFor(m => m.AccountRequireEmailVerification, new { ng_model = "siteConfiguration.AccountRequireEmailVerification" })
+            @Html.LabelFor(m => m.AccountRequireEmailVerification)
+        </div>
+    </div>
+    @Html.Partial("_PanelFooter")
+
+
+    @{
+        pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass="btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadSiteFeatures()" });
+
+        if (canEdit)
+        {
+            pageButtons.Add(new PageButton { Id = "btnSave", ButtonText = "Save", Icon = "floppy-disk", Method = "saveSiteFeaturesSettings()" });
+        }
+
+    }
+    @Html.Partial("_PanelHeader", new PageHeaderModel { ViewId = "SiteFeaturesSettings", PageTitle = "Site Features Settings", PageButtons = pageButtons })
+
+    @using (Html.BeginForm("managesite", "security", FormMethod.Post, new { role = "form", id = "frmSiteFeaturesSettings", @class = "form-horizontal" }))
+    {
+        <div class="panel panel-primary" ng-repeat="module in siteFeatures.Features">
+            <!-- Default panel contents -->
+            <div class="panel-heading">{{module.ModuleName}}</div>
+            <div class="panel-body">
+                <p>{{module.ModuleDescription}}</p>
+                <hr />
+                <p class="text-primary">Features</p>
+                <div class="col-md-3" ng-repeat="feature in module.ModuleFeatures">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            {{feature.FeatureName}}
+                        </div>
+                        <div class="panel-body">
+                            <ul ng-show="feature.SiteContentSettings.length>0">
+                                <li ng-repeat="contentSetting in feature.SiteContentSettings">
+                                    <input type="checkbox" name="SelectedContentSettings" ng-model="contentSetting.IsAssigned" />
+                                    {{contentSetting.ContentSettingName}}
+                                </li>
+                            </ul>
+                            <div ng-show="feature.SiteContentSettings.length==0">No settings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    @Html.Partial("_PanelFooter", new PageFooterModel { PageButtons = pageButtons })
+</div>

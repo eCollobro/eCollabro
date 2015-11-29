@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>EF6.Contrib</id>
+    <version>1.0.5</version>
+    <authors>Unai Zorrilla Castro</authors>
+    <owners>Unai Zorrilla Castro</owners>
+    <licenseUrl>https://ef6contrib.codeplex.com/license</licenseUrl>
+    <projectUrl>https://ef6contrib.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>A collection of EF contributions for .NET Entity Framework 6.</description>
+    <summary>A collection of EF contributions for .NET Entity Framework 6.</summary>
+    <language>en-US</language>
+    <tags>EF6.Contrib Contrib EntityFramework EF6</tags>
+    <dependencies>
+      <dependency id="EntityFramework" version="6.1.0" />
+      <dependency id="Common.Logging" version="2.1.2" />
+    </dependencies>
+  </metadata>
+</package>

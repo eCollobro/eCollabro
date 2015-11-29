@@ -1,0 +1,34 @@
+﻿@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model RoleModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+}
+@Scripts.Render("~/bundles/role") 
+<div id="placeHolderRoles"></div>
+<div id="divRoles" ng-controller="rolesController" ng-init="initialize('@canEdit','@canDelete')">
+
+    @{
+        List<PageButton> pageButtons = new List<PageButton>(); 
+        pageButtons.Add(new PageButton { Id = "btnRefresh", ButtonText = "Refresh", CssClass = "btn btn-warning", Icon = "refresh", Method = "loadRoles()" });
+        if (userPermissions.Contains(PermissionEnum.AddContent))
+        {
+            pageButtons.Add(new PageButton { Id = "btnAdd", ButtonText = "Add Role", CssClass="btn btn-success", Icon = "plus", Method = "openRole(0)" });
+        }
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { PageTitle = "Roles", ViewId = "Roles", PageButtons= pageButtons })
+    <table style="width:100%" class="table table-striped table-bordered" id="tblRoles" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Role Code</th>
+                <th>Role Name</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>

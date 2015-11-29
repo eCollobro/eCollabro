@@ -1,0 +1,26 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Store;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using System.Web.Optimization;
+@using eCollabro.Common;
+@model ProductModel
+@Scripts.Render("~/bundles/product")
+<div id="divProduct" ng-controller="productController" ng-init="initialize(@Model.ProductId)">
+
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "Product", PageTitle = "Product Details" })
+    <div ng-show="isVisible">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Product # {{product.ProductId}} -  {{product.ProductTitle}}</div>
+            <div class="panel-body">
+                <strong> Product Description:</strong> <br />
+                <div id="divProductDescription"></div>
+                <br />
+                <strong> Product Detailed Specifications:</strong> <br />
+                <div id="divProductSpecifications"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("~/Areas/eCollabro.Web.Content/Views/ContentComment/Index.cshtml", new ContentCommentModel { ContextId = (int)ContextEnum.Product, ContextContentId = Model.ProductId })

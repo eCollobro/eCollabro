@@ -1,0 +1,33 @@
+﻿@using eCollabro.Client.Models.Workflow;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model UserTaskModel
+<script type="text/javascript" src="~/ViewScripts/Services/workflowService.js"></script>
+<script type="text/javascript" src="~/ViewScripts/Workflow/userTask.js"></script>
+<script type="text/javascript" src="~/ViewScripts/Workflow/userTasks.js"></script>
+<script type="text/javascript" src="~/ViewScripts/Workflow/workflowComments.js"></script>
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+</script>
+<div id="placeHolderUserTasks"></div>
+<div id="divUserTasks" ng-controller="userTasksController" ng-init="loadUserTasks()">
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh",CssClass="btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadUserTasks()" });
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "UserTasks", PageTitle = "Task List", PageButtons= pageButtons, ValidateForm=true })
+   
+    @Html.Partial("~/Views/Workflow/_UserTasksSearch.cshtml")
+    <table style="width:100%" class="table table-striped table-bordered" id="tblUserTasks" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Id #</th>
+                <th>Title</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>

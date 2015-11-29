@@ -1,0 +1,27 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model ImageModel
+@if (!Request.IsAjaxRequest())
+{
+    <script type="text/javascript" src="~/Areas/Content/app/controllers/imageGallery/dashboardWidget.js"></script>
+}
+<div id="divImageGalleryHome" ng-controller="imageGalleryDashboardWidgetController" ng-init="initialize()">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span ng-click="changeCaption()" data-toggle="collapse" title="expand/collapse" data-target="#collapseImageGallery" class="{{caption}} text-primary"></span> Recently Added Images <span class="badge">{{recentImages.length}}</span></div>
+        <div id="collapseImageGallery" class="panel-collapse collapse in">
+            <div class="panel-body widget">
+                <div id="divSummaryMessageImageGalleryWidget"></div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="image in recentImages">
+                        <p class="list-group-item-heading"><a href="/Content/ImageGallery/Image/{{image.ImageId}}">{{image.ImageTitle}}</a></p>
+                        <p class="list-group-item-text"><img src="/Content/ImageGallery/ImageThumbnail/{{image.ImageId}}" /></p>
+                    </li>
+                </ul>
+                <div ng-show="recentImages.length==0" class="text-info">There are no records to show.</div>
+            </div>
+            <div class="panel-footer"><a href="/content/imagegallery/">Image Gallery Home</a> | <a href="/content/imagegallery/imagegalleries">Image Galleries</a></div>
+        </div>
+    </div>
+</div>

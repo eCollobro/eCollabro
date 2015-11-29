@@ -1,0 +1,18 @@
+﻿@using eCollabro.Web.Base;
+@using eCollabro.Client.Models.Core
+@using eCollabro.Client.Models.Content;
+@model ContentPageModel
+@if (Model != null && Model.ContentPageId != 0)
+{
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ContentPage", PageTitle = Model.ContentPageTitle })
+    <p>
+        <div id="divContentPageContent">@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.ContentPageContent))</div>
+    </p>
+}
+else
+{
+    <div class="col-md-12">
+        @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "HomePage", PageTitle = "eCollabro" })
+    </div>
+ }
+

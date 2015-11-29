@@ -1,0 +1,61 @@
+﻿@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model SiteModel
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/site")
+}
+@{
+    List<PageButton> pageButtons = new List<PageButton>();
+    pageButtons.Add(new PageButton { Id = "btnSites", ButtonText = "Sites", HideOnFooter = true, CssClass = "btn btn-success", Icon = "th-list", Method = "openSites()" });
+    pageButtons.Add(new PageButton { Id = "btnSave", HideOnHeader=true, ButtonText = "Save", CssClass = "btn btn-primary", Icon = "floppy-disk", Method = "saveSite()" });
+}
+<div id="divSite" ng-controller="siteController" ng-init="loadSite(@Model.SiteId)">
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "Site", PageTitle = "Site - Add/Edit", ValidateForm = true,PageButtons=pageButtons })
+    @using (Html.BeginForm("managesite", "security", FormMethod.Post, new { role = "form", id = "frmSite", @class = "form-horizontal" }))
+    {
+
+        @Html.AntiForgeryToken()
+        if (Model.SiteId != 0) // Edit Mode
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.SiteCode, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.SiteCode, new { ng_model = "site.SiteCode", @readonly = "readonly", @class = "form-control" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            @Html.LabelFor(m => m.SiteName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.SiteName, new { ng_model = "site.SiteName", @class = "form-control", maxlength = "50" })
+                @Html.ValidationMessageFor(m => m.SiteName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.SiteDesc, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextAreaFor(m => m.SiteDesc, new { ng_model = "site.SiteDesc", @class = "form-control", maxlength = "255" })
+                @Html.HiddenFor(m => m.SiteId, new { ng_model = "site.SiteId" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.IsActive, new { ng_model = "site.IsActive" })
+                    @Html.LabelFor(m => m.IsActive)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            @Html.Partial("_PageFooter", new PageFooterModel
+        {
+            PageButtons = pageButtons
+        })
+        </div>
+
+
+    }
+</div>

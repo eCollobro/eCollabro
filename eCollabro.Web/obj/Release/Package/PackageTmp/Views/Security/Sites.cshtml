@@ -1,0 +1,25 @@
+﻿@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core
+@using eCollabro.Web.Base;
+@model SiteModel
+@Scripts.Render("~/bundles/site") 
+<div id="placeHolderSites"></div>
+<div id="divSites" ng-controller="sitesController" ng-init="loadSites()">
+
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnAdd", CssClass="btn btn-success", ButtonText = "Add Site", Icon = "plus", Method = "openSite(0)" });
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass="btn btn-warning",ButtonText = "Refresh", Icon = "refresh", Method = "loadSites()" });
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { PageTitle = "Sites", ViewId = "Sites", PageButtons = pageButtons })
+    <table style="width:100%" class="table table-striped table-bordered" id="tblSites" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Site Code</th>
+                <th>Site Name</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>

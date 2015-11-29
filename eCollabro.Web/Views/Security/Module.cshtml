@@ -1,0 +1,68 @@
+﻿@using eCollabro.Client.Models.Core;
+@model ModuleModel
+@using eCollabro.Web.Base;
+
+<script type="text/javascript">
+
+    function processModuleSaveResponse(ajaxResponse) {
+
+        if (ajaxResponse.ResultStatus == "1") //"Success") 
+        {
+            var divContainerModules = document.getElementById("divContainerModules");
+            if (divContainerModules) {
+                ShowModules(ajaxResponse.Message); // calling parent's method
+            }
+            else {
+                showMessage("divSummaryMessageManageModule", ajaxResponse.Message, "success");
+            }
+        }
+        else {
+            if (ajaxResponse.ResultStatus == 4) // not authorized
+            {
+                location.href = "/account/login?ReturnUrl=%2fsecurity%2fsites";
+            }
+            else {
+                showMessage("divSummaryMessageManageModule", ajaxResponse.Message, "danger");
+            }
+
+        }
+    }
+
+</script>
+@using (Html.BeginView(new ViewParameters { ViewId = "ManageModule", ViewTitle = "Manage Modules - Add/Edit", ValidateForm = true }))
+{
+    using (Ajax.BeginForm("ManageModule", "Security", new AjaxOptions
+    {
+        OnSuccess = "processModuleSaveResponse",
+        OnFailure = "onFailedAjaxPost"
+    }, new { module = "form", id = "frmManageModule" }))
+    {
+       
+      
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-6">
+        @if (!Model.ModuleId.Equals(0)) // Edit Mode
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModuleCode)
+                @Html.TextBoxFor(m => m.ModuleCode, new { value = @Model.ModuleCode, @readonly = "readonly", @class = "form-control" })
+            </div>
+        }
+    
+            <div class="form-group">
+                @Html.LabelFor(m => m.ModuleName)
+                @Html.TextBoxFor(m => m.ModuleName, new { @class = "form-control", maxlength = 100, size = 100 })
+                @Html.ValidationMessageFor(m => m.ModuleName)
+            </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ModuleDescription)
+            @Html.TextBoxFor(m => m.ModuleDescription, new { @class = "form-control", maxlength = 510, size = 510 })
+        </div>
+        @Html.HiddenFor(m => m.ModuleId)
+
+        <button type="submit" class="btn btn-primary" name="btnSubmit">Save</button>
+        <button type="button" class="btn btn-default" onclick="javascript: location.href = '/security/modules'">Cancel</button>
+    </div>
+    }
+}

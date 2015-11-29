@@ -1,0 +1,73 @@
+﻿@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model RoleModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+
+    List<PageButton> pageButtons = new List<PageButton>();
+    pageButtons.Add(new PageButton { Id = "btnRoles", ButtonText = "Roles", HideOnFooter=true, CssClass = "btn btn-success", Icon = "th-list", Method = "openRoles()" });
+    if ((canEdit && !Model.RoleId.Equals(0)) || (canAdd && Model.RoleId.Equals(0)))
+    {
+        pageButtons.Add(new PageButton { Id = "btnSave", ButtonText = "Save", HideOnHeader=true, CssClass = "btn btn-primary", Icon = "floppy-disk", Method = "saveRole()" });
+    }
+}
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/role")
+}
+<div id="divRole" ng-controller="roleController" ng-init="loadRole(@Model.RoleId)">
+    @Html.Partial("_PageHeader", new PageHeaderModel
+    {
+        ViewId = "Role",
+        PageTitle = "Role - Add/Edit",
+        ValidateForm = true,
+        PageButtons = pageButtons
+    })
+    @using (Html.BeginForm("Role", "Security", FormMethod.Post, new { role = "form", id = "frmRole", @class = "form-horizontal" }))
+    {
+
+        @Html.AntiForgeryToken()
+        if (Model.RoleId != 0) // Edit Mode
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.RoleCode, new { @class = "col-md-2 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.RoleCode, new { ng_model = "role.RoleCode", @readonly = "readonly", @class = "form-control" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.RoleName, new { ng_model = "role.RoleName", @class = "form-control", maxlength = "250" })
+                @Html.ValidationMessageFor(m => m.RoleName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.RoleDescription, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextAreaFor(m => m.RoleDescription, new { ng_model = "role.RoleDescription", @class = "form-control", maxlength = "255" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.IsActive, new { ng_model = "role.IsActive" })
+                    @Html.LabelFor(m => m.IsActive)
+                </div>
+            </div>
+        </div>
+    <div class="col-md-7">
+        @Html.Partial("_PageFooter", new PageFooterModel
+        {
+            PageButtons = pageButtons
+        })
+    </div>
+    }
+</div>

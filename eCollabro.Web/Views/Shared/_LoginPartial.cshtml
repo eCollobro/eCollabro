@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNet.Identity
+@using eCollabro.Client.Models.Core;
+@if (Request.IsAuthenticated)
+{
+    <div ng-show="userSites.length>1">
+        <p class="navbar-text navbar-left">Site :</p>
+        <div class="navbar-form navbar-left">
+            <select data-ng-model="selectedSite" ng-options="site.SiteName for site in userSites" class="form-control" ng-change="switchSite()"></select>
+        </div>
+    </div>
+    <form id="logoutForm" class="navbar-right" name="logoutForm" action="/account/logoff" method="post">
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "ChangePassword", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li ng-show="AllowRegistration"><a href="/Account/Register" id = "registerLink">Register</a></li>
+        <li><a href="/account/login" id="loginLink">Login</a></li>
+    </ul>
+}

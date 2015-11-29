@@ -1,0 +1,68 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model ImageGalleryModel
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/imagegallery")
+}
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+
+    List<PageButton> pageButtons = new List<PageButton>();
+    pageButtons.Add(new PageButton { Id = "btnImageGalleries", ButtonText = "Image Galleries", HideOnFooter = true, CssClass = "btn btn-success", Icon = "th-list", Method = "openImageGalleries()" });
+    if ((canEdit && !Model.ImageGalleryId.Equals(0)) || (canAdd && Model.ImageGalleryId.Equals(0)))
+    {
+        pageButtons.Add(new PageButton { Id = "btnSave", ButtonText = "Save", HideOnHeader = true, CssClass = "btn btn-primary", Icon = "floppy-disk", Method = "saveImageGallery()" });
+    }
+}
+<div id="divImageGallery" ng-controller="imageGalleryController" ng-init="loadImageGallery(@Model.ImageGalleryId)">
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ImageGallery", PageTitle = "Image Gallery", ValidateForm = true ,PageButtons=pageButtons})
+    @using (Html.BeginForm("ImageGallery", "ImageGallery", FormMethod.Post, new { role = "form", id = "frmImageGallery", @class = "form-horizontal" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.ImageGalleryName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.ImageGalleryName, new { ng_model = "imageGallery.ImageGalleryName", @class = "form-control", maxlength = "50" })
+                @Html.ValidationMessageFor(m => m.ImageGalleryName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ImageGalleryDescription, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextAreaFor(m => m.ImageGalleryDescription, new { ng_model = "imageGallery.ImageGalleryDescription", @class = "form-control", maxlength = "255" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.IsActive, new { ng_model = "imageGallery.IsActive" })
+                    @Html.LabelFor(m => m.IsActive)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.IsAnomynousAccess, new { ng_model = "imageGallery.IsAnomynousAccess" })
+                    @Html.LabelFor(m => m.IsAnomynousAccess)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            @Html.Partial("_PageFooter", new PageFooterModel
+                {
+                    PageButtons = pageButtons
+                })
+        </div>
+
+    }
+</div>

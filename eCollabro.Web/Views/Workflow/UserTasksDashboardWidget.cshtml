@@ -1,0 +1,31 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model BlogModel
+@if (!Request.IsAjaxRequest())
+{
+    <script type="text/javascript" src="~/app/Services/workflowService.js"></script>
+    <script type="text/javascript" src="~/app/controllers/workflow/userTasksDashboardWidget.js"></script>
+}
+<div id="divUserTasks" ng-controller="userTasksDashboardWidgetController" ng-init="initialize()">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+        <span ng-click="changeCaption()" data-toggle="collapse" title="expand/collapse"  data-target="#collapseTask" class="{{caption}} text-primary">
+        </span> New Tasks Assigned to me/my Role <span class="badge pull-right">{{userTasks.length}}</span>
+        </div>
+        <div id="collapseTask" class="panel-collapse collapse in">
+            <div class="panel-body widget">
+                <div id="divSummaryMessageUserTasksDashboard"></div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="userTask in userTasks">
+                        <p class="list-group-item-heading"><a href="/workflow/usertask/{{userTask.TaskId}}">{{userTask.TaskTitle}}</a></p>
+                        <p class="list-group-item-text"> {{userTask.TaskDescription}}</p>
+                    </li>
+                </ul>
+                <div ng-show="userTasks.length==0" class="text-info">Nothing seems be in your queue for now.</div>
+            </div>
+            <div class="panel-footer"><a href="/workflow/usertasks/">Task List</a></div>
+        </div>
+    </div>
+</div>

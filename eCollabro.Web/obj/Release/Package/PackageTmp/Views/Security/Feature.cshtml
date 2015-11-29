@@ -1,0 +1,104 @@
+﻿@using eCollabro.Client.Models;
+@model FeatureModel
+@using eCollabro.Web.Base;
+<script type="text/javascript">
+
+    function processModuleSaveResponse(ajaxResponse) {
+
+        if (ajaxResponse.ResultStatus == "1") //"Success") 
+        {
+            var divContainerModules = document.getElementById("divContainerModules");
+            if (divContainerModules) {
+                ShowModules(ajaxResponse.Message); // calling parent's method
+            }
+            else {
+                showMessage("divSummaryMessageManageFeature", ajaxResponse.Message, "success");
+            }
+        }
+        else {
+            if (ajaxResponse.ResultStatus == 4) // not authorized
+            {
+                location.href = "/account/login?ReturnUrl=%2fsecurity%2fmodules";
+            }
+            else {
+                showMessage("divSummaryMessageManageFeature", ajaxResponse.Message, "danger");
+            }
+
+        }
+    }
+
+    $(document).ready(function () {
+
+        $("#ddlFeature").change(function () {
+            dropdownval = $('#ddlFeature').val();
+            // alert(dropdownval);
+
+            if (dropdownval == 2) {
+                $("#txtLink").css("display", "inline");
+                $("#drpContentType").css("display", "none");
+            }
+
+            else if (dropdownval == 3) {
+                $("#txtLink").css("display", "none");
+                $("#drpContentType").css("display", "none");
+            }
+
+            else if (dropdownval == 4) {
+                $("#drpContentType").css("display", "inline");
+                $("#txtLink").css("display", "none");
+            }
+            else {
+                $("#txtLink").css("display", "none");
+                $("#drpContentType").css("display", "none");
+            }
+
+        });
+    })
+
+   
+</script>
+@using (Html.BeginView(new ViewParameters { ViewId = "ManageFeature", ViewTitle = "Manage Modules (Features)- Add/Edit", ValidateForm = true }))
+{
+    using (Ajax.BeginForm("ManageFeature", "Security", new AjaxOptions
+{
+    OnSuccess = "processModuleSaveResponse",
+    OnFailure = "onFailedAjaxPost"
+}, new { role = "form", id = "frmManageFeature" }))
+    {
+       
+    @Html.AntiForgeryToken()
+    <div class="col-md-6">
+        @if (!Model.FeatureId.Equals(0))
+        {  
+    <div class="form-group">
+        @Html.LabelFor(m => m.FeatureCode, "Feature Code")
+        @Html.TextBoxFor(model => model.FeatureCode, new { value = @Model.FeatureCode, @readonly = "readonly", @class = "form-control" })
+    </div>
+        }
+    <div class="form-group">
+        @Html.LabelFor(m => m.FeatureName)
+        @Html.TextBoxFor(m => m.FeatureName, new { @class = "form-control", maxlength = 100, size = 100 })
+        @Html.ValidationMessageFor(m => m.FeatureName)
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.IsNavigationLink)
+            @Html.CheckBoxFor(m => m.IsNavigationLink)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Link)
+            @Html.TextBoxFor(m => m.Link, new { @class = "form-control", maxlength = 100, size = 100 })
+            @Html.ValidationMessageFor(m => m.Link)
+        </div>
+
+        @Html.HiddenFor(m => m.FeatureId)
+        @Html.HiddenFor(m => m.FeatureLanguageId)
+        @Html.HiddenFor(m => m.ModuleId)
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-default" onclick="javascript: location.href = '/security/modules'">Cancel</button>
+    </div>
+    }
+
+}

@@ -1,0 +1,24 @@
+﻿@using eCollabro.Client.Models.Core
+@model PageFooterModel
+<div class='row'>
+    <div class="col-md-12">
+        <h3 class="pull-right">
+            @if (Model!=null && Model.PageButtons != null)
+            {
+                foreach (PageButton pageButton in Model.PageButtons.Where(qry=>qry.HideOnFooter.Equals(false)).ToList())
+                {
+                    var id = pageButton.Id + "Footer";
+                    if (string.IsNullOrEmpty(pageButton.CssClass))
+                    {
+                        pageButton.CssClass = "btn-sm btn-primary";
+                    }
+                    <button type="button" class="@pageButton.CssClass" id="@id" ng-click="@pageButton.Method"><span class="glyphicon glyphicon-@pageButton.Icon"></span> @pageButton.ButtonText</button>
+                }
+            }
+        </h3>
+    </div>
+</div>
+
+         <!-- do not delete . These are closing div for panel header-->
+        </div>
+    </div>

@@ -1,0 +1,58 @@
+﻿@using eCollabro.Client;
+@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model SiteFeaturesModel
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/site")
+}
+
+<div id="divSiteFeatures" ng-controller="siteFeaturesController" ng-init="loadSiteFeatures(@Model.SiteId)">
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass="btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadSiteFeatures(" + Model.SiteId + ")" });
+        pageButtons.Add(new PageButton { Id = "btnSites", CssClass = "btn btn-success", ButtonText = "Sites", Icon = "th-list", Method = "sites()" });
+        pageButtons.Add(new PageButton { Id = "btnSubmit", ButtonText = "Save", Icon = "refresh", Method = "saveSiteFeatures()" });
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "SiteFeatures", PageTitle = "Site Features", PageButtons = pageButtons })
+    @Html.AntiForgeryToken()
+    <div class="form-group control-label">
+        @Html.LabelFor(m => m.SiteCode, new { @class = "col-md-2" })
+        {{siteFeatures.SiteCode}}
+    </div>
+    <div class="form-group control-label">
+        @Html.LabelFor(m => m.SiteName, new { @class = "col-md-2" })
+        {{siteFeatures.SiteName}}
+    </div>
+
+    @using (Html.BeginForm("managesite", "security", FormMethod.Post, new { role = "form", id = "frmSite", @class = "form-horizontal" }))
+    {
+        <div class="panel panel-primary" ng-repeat="module in siteFeatures.Features">
+            <!-- Default panel contents -->
+            <div class="panel-heading">{{module.ModuleName}}</div>
+            <div class="panel-body">
+                <p>{{module.ModuleDescription}}</p>
+                <hr />
+                <p class="text-primary">Features</p>
+                <div class="col-md-3" ng-repeat="feature in module.ModuleFeatures">
+                    <input type="checkbox" name="selectedFeatures" value="{{feature.FeatureId}}" ng-model="feature.IsSelected" />
+                    {{feature.FeatureName}}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="checkbox">
+                    <input type="checkbox" name="CreateNavigation" id="chkCreateNavigation" ng-model="siteFeatures.CreateNavigations" />
+                    <label>Add Navigation for selected features</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.Partial("_PageFooter", new PageFooterModel { PageButtons = pageButtons })
+            </div>
+        </div>
+    }
+</div>

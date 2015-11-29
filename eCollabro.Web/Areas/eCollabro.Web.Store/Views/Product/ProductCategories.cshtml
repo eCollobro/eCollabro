@@ -1,0 +1,43 @@
+﻿@using eCollabro.Client.Models.Store;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using System.Web.Optimization;
+@using eCollabro.Common
+@model ProductCategoryModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+}
+@Scripts.Render("~/bundles/product") 
+<div id="placeHolderProductCategories"></div>
+<div id="divProductCategories" ng-controller="productCategoriesController" ng-init="initialize('@canAdd','@canEdit','@canDelete')">
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass="btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadProductCategories()" });
+        if (canAdd)
+        {
+            pageButtons.Add(new PageButton { Id = "btnAdd", CssClass="btn btn-success", ButtonText = "Add Product Category", Icon = "plus", Method = "openProductCategory(0)" });
+        }
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ProductCategories", PageTitle = "Product Categories", PageButtons = pageButtons })
+    <table style="width:100%" class="table table-striped table-bordered" id="tblProductCategories" cellspacing="0">
+        <thead>
+            <tr>
+                @if (canAdd || canEdit || canDelete) // Contributor
+                {
+                    <th>Id #</th>
+                    <th style="width:350px">Category</th>
+                    <th>Active</th>
+                    <th>Action</th>
+                }
+                else
+                {
+                    <th style="width:80%">Category</th>
+                    <th>Action</th>
+                }
+            </tr>
+        </thead>
+    </table>
+</div>

@@ -1,0 +1,65 @@
+﻿@using eCollabro.Client;
+@using eCollabro.Client.Models.Core;
+@model SiteRoleModel
+@using eCollabro.Client.Resources
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        AddUnrobustiveFormValidation("frmManageSiteRole", "divSummaryMessage")
+    });
+
+    function OnFailedSaving(parameters) {
+        alert('@ResourceMessages.TechnicalErrorMsg');
+    }
+
+    function OnSuccessSaving(ajaxResponse) {
+        processSiteRoleSaveResponse(ajaxResponse);
+    }
+
+    function processSiteRoleSaveResponse(ajaxResponse) {
+
+        if (ajaxResponse.ResultStatus == "1") //"Success") 
+        {
+            showMessage("divSummaryMessage", ajaxResponse.Message, "success");            
+        }
+        else {
+            if (ajaxResponse.ResultStatus == 4) // not authorized
+            {
+                location.href = "/account/login?ReturnUrl=%2fsecurity%2fsites";
+            }
+            else {
+                showMessage("divSummaryMessage", ajaxResponse.Message, "danger");
+            }
+
+        }
+    }
+    $(document).ready(function () {
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+           @:showMessage("divSummaryMessage", "@ViewBag.ErrorMessage", "danger");
+                }
+    });
+</script>
+
+@using (Ajax.BeginForm("ManageSiteDefaultRole", "Security", new AjaxOptions
+{
+    OnSuccess = "OnSuccessSaving",
+    OnFailure = "OnFailedSaving"
+}, new { role = "form", id = "frmManageSiteRole" }))
+{
+    @Html.AntiForgeryToken();
+    <div id="divSummaryMessage"></div>
+
+    <div class="row">
+        <div class="form-group">
+            @Html.LabelFor(m => m.RoleId)
+            @Html.DropDownList("RoleId", new SelectList(Model.Roles, "RoleId", "RoleName"), "--Select--", new { @class = "form-control", id = "ddlRoles" })
+            @*@Html.DropDownListFor(m => m.RoleId, new SelectList(Model.Roles, "RoleId", "RoleName"), "--Select--", new { @class = "form-control", id = "ddlRoles" })*@
+            @*@Html.ValidationMessage("RoleId")*@
+            @Html.ValidationMessageFor(m => m.RoleId)
+        </div>        
+    </div>
+    <input type="submit" value="Save Mapping" class="btn btn-primary" />
+}
+

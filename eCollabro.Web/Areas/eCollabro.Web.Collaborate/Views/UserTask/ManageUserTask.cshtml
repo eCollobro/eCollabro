@@ -1,0 +1,99 @@
+﻿@using eCollabro.Client.Models.Workflow;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Client.Resources;
+@using eCollabro.Utilities.Constants;
+@using eCollabro.Web.Base;
+@model UserTaskModel
+@if (!Request.IsAjaxRequest())
+{
+    <script type="text/javascript" src="~/Areas/eCollabro.Web.Collaborate/ViewScripts/UserTask/ManageUserTask.js"></script>
+}
+<div id="divUserTask" ng-controller="UserTaskController" ng-init="LoadUserTask(@Model.TaskId)">
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "UserTask", PageTitle = "Task List - Add/Edit", AddUnobtrusiveValidation = true })
+    @using (Html.BeginForm("UserTask", "UserTask", FormMethod.Post, new { role = "form", id = "frmUserTask" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <div ng-model="UserTask">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Task Details</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.TaskTitle)
+                                @Html.TextBoxFor(m => m.TaskTitle, new { ng_model = "UserTask.TaskTitle", @class = "form-control", maxlength = "50" })
+                                @Html.ValidationMessageFor(m => m.TaskTitle)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.TaskDescription)
+                                @Html.TextAreaFor(m => m.TaskDescription, new { ng_model = "UserTask.TaskDescription", @class = "form-control", maxlength = "255" })
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Action</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AssignedRoleId)
+                                <select data-ng-model="SelectedRole" ng-options="role.RoleName for role in ActiveRoles" class="form-control" ng-change="UpdateRole()"></select>
+                            </div>
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.IsActive, new { ng_model = "UserTask.IsActive" })
+                                @Html.LabelFor(m => m.IsActive)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Comments</div>
+                    <div class="panel-body">
+                        <div style="height:300px;overflow:auto">
+                            fjjfsljfsljsf
+                            <br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                            fjjfsljfsljsf<br />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-primary" ng-click="SaveUserTask()">Save</button>
+                    <button type="button" class="btn btn-default" onclick="javascript: location.href = '/content/UserTask/'">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

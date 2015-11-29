@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\VservProjects\publishedservice</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="App_Data/SetupScripts/uspGetNavigations.sql">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="App_Data/SetupScripts/uspGetRoleFeatures.sql">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="App_Data/SetupScripts/uspGetSiteAssignedFeatures.sql">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="App_Data/SetupScripts/uspGetSiteFeatures.sql">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="App_Data/SetupScripts/uspGetSiteFeaturesSettings.sql">
+      <publishTime>11/20/2015 23:35:42</publishTime>
+    </File>
+    <File Include="App_Data/SetupScripts/uspGetUserNavigations.sql">
+      <publishTime>11/20/2015 23:35:42</publishTime>
+    </File>
+    <File Include="bin/eCollabro.BAL.dll">
+      <publishTime>11/28/2015 18:46:43</publishTime>
+    </File>
+    <File Include="bin/eCollabro.BAL.Entities.dll">
+      <publishTime>11/28/2015 18:46:42</publishTime>
+    </File>
+    <File Include="bin/eCollabro.Common.dll">
+      <publishTime>11/28/2015 18:46:09</publishTime>
+    </File>
+    <File Include="bin/eCollabro.DAL.dll">
+      <publishTime>11/28/2015 18:46:42</publishTime>
+    </File>
+    <File Include="bin/eCollabro.DataMapper.dll">
+      <publishTime>11/28/2015 18:46:10</publishTime>
+    </File>
+    <File Include="bin/eCollabro.Exceptions.dll">
+      <publishTime>11/28/2015 18:46:10</publishTime>
+    </File>
+    <File Include="bin/eCollabro.Resources.dll">
+      <publishTime>11/28/2015 18:46:10</publishTime>
+    </File>
+    <File Include="bin/eCollabro.Service.DataContracts.dll">
+      <publishTime>11/28/2015 18:46:10</publishTime>
+    </File>
+    <File Include="bin/eCollabro.Service.dll">
+      <publishTime>11/28/2015 18:46:43</publishTime>
+    </File>
+    <File Include="bin/eCollabro.Service.Host.dll">
+      <publishTime>11/28/2015 18:46:44</publishTime>
+    </File>
+    <File Include="bin/eCollabro.Service.ServieContracts.dll">
+      <publishTime>11/28/2015 18:46:11</publishTime>
+    </File>
+    <File Include="bin/eCollabro.Utilities.dll">
+      <publishTime>11/28/2015 18:46:10</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>11/20/2015 23:40:00</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>11/20/2015 23:38:21</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>11/20/2015 23:41:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Configuration.dll">
+      <publishTime>11/20/2015 23:45:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.dll">
+      <publishTime>11/20/2015 23:45:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.RegistrationByConvention.dll">
+      <publishTime>11/20/2015 23:45:22</publishTime>
+    </File>
+    <File Include="ContentService.svc">
+      <publishTime>11/20/2015 23:35:40</publishTime>
+    </File>
+    <File Include="ESBService.svc">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="LookupService.svc">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="SecurityService.svc">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="SetupService.svc">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="StoreService.svc">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/28/2015 18:46:44</publishTime>
+    </File>
+    <File Include="WorkflowService.svc">
+      <publishTime>11/20/2015 23:35:41</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

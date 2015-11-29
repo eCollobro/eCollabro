@@ -1,0 +1,78 @@
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+	display: block;
+}
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+	top: 90%;
+}
+ul.dropdown-menu ul.dropdown-menu {
+	left: 95%; top: 0px !important; margin-top: -5px;
+}
+.navbar ul.dropdown-menu ul.dropdown-menu {
+	left: 100%;
+}
+.dropdown-menu {
+	max-width: 999px;
+}
+.caret-right {
+	border-width: 4px; border-style: solid; border-color: transparent transparent transparent rgb(0, 0, 0); width: 0px; height: 0px; text-indent: -99999px; margin-top: 6px; margin-left: 4px; vertical-align: top; display: inline-block; opacity: 0.5;
+}
+a:hover > .caret-right {
+	border-left-color: rgb(255, 255, 255); border-left-width: 4px; border-left-style: solid; opacity: 1;
+}
+.active > .caret-right {
+	border-left-color: rgb(255, 255, 255); border-left-width: 4px; border-left-style: solid; opacity: 1;
+}
+.navbar .dropdown-menu .dropdown-menu::before {
+	border-width: 7px 7px 7px medium; border-style: solid solid solid none; border-color: transparent rgba(0, 0, 0, 0.2) transparent currentColor; left: -7px; top: 10px;
+}
+.navbar .dropdown-menu .dropdown-menu::after {
+	border-width: 6px 6px 6px medium; border-style: solid solid solid none; border-color: transparent rgb(255, 255, 255) transparent currentColor; left: -6px; top: 11px; margin-top: 0px;
+}
+.nav > li > span.separator {
+	display: block;
+}
+.nav-tabs > li > span.separator {
+	line-height: 14px; padding-right: 12px; padding-left: 12px; margin-right: 2px;
+}
+.nav-pills > li > span.separator {
+	line-height: 14px; padding-right: 12px; padding-left: 12px; margin-right: 2px;
+}
+.nav-tabs > li > span.separator {
+	border-radius: 4px 4px 0px 0px; border: 1px solid transparent; line-height: 18px; padding-top: 8px; padding-bottom: 8px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0;
+}
+.nav-pills > li > .separator {
+	border-radius: 5px; padding-top: 8px; padding-bottom: 8px; margin-top: 2px; margin-bottom: 2px; -webkit-border-radius: 5px; -moz-border-radius: 5px;
+}
+.nav-stacked.nav-tabs > li > span.separator {
+	border-radius: 0px; border: 1px solid rgb(221, 221, 221); -webkit-border-radius: 0; -moz-border-radius: 0;
+}
+.nav-stacked.nav-tabs > li:first-child > span.separator {
+	border-radius: 4px 4px 0px 0px; -webkit-border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0;
+}
+.nav-stacked.nav-tabs > li:last-child > span.separator {
+	border-radius: 0px 0px 4px 4px; -webkit-border-radius: 0 0 4px 4px; -moz-border-radius: 0 0 4px 4px;
+}
+.nav-stacked.nav-tabs > li > span.separator:hover {
+	border-color: rgb(221, 221, 221); z-index: 2;
+}
+.nav-stacked.nav-pills > li > span.separator {
+	margin-bottom: 3px;
+}
+.nav-stacked.nav-pills > li:last-child > span.separator {
+	margin-bottom: 1px;
+}
+.nav-stacked > li > span.separator {
+	margin-right: 0px;
+}
+.dropdown-menu .separator {
+	padding: 3px 15px; color: rgb(85, 85, 85); line-height: 18px; clear: both; font-weight: normal; display: block; white-space: nowrap;
+}
+.navbar .nav > li > span.separator {
+	padding: 10px 10px 11px; color: rgb(153, 153, 153); line-height: 19px; text-decoration: none; float: none; text-shadow: 0px -1px 0px rgba(0,0,0,0.25);
+}
+.nav-list .divider {
+	margin: 8px 1px; height: 1px; overflow: hidden; border-bottom-color: rgb(255, 255, 255); border-bottom-width: 1px; border-bottom-style: solid; background-color: rgb(229, 229, 229);
+}
+.nav-list span.separator {
+	padding: 3px 15px; margin-right: -15px; margin-left: -15px; display: block; text-shadow: 0px 1px 0px rgba(255,255,255,0.5);
+}

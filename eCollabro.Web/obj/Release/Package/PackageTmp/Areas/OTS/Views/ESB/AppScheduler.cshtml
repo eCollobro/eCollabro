@@ -1,0 +1,37 @@
+﻿@using eCollabro.Client.Models.ESB;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model AppSchedulerModel
+<div id="divAppScheduler" ng-controller="appSchedulerController" ng-init="initialize()">
+    @*<div class="modal fade" id="divAppScheulerModal" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">App Scheduler</h4>
+                </div>
+                <div class="modal-body">*@
+                    @using (Html.BeginForm("AppScheduler", "ESB", FormMethod.Post, new { role = "form", id = "frmAppScheduler", @class = "form-horizontal" }))
+                    {
+
+                        <div class="form-group col-md-5">
+                            @Html.LabelFor(m => m.StartDate, new { @class = "col-md-4 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control datepicker", ng_model = "searchCriteria.FromDate" })
+                                @Html.ValidationMessageFor(m => m.StartDate)
+                            </div>
+                        </div>
+                        <div class="form-group col-md-5">
+                            @Html.LabelFor(m => m.EndDate, new { @class = "col-md-4 control-label" })
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control datepicker", ng_model = "searchCriteria.ToDate" })
+                                @Html.ValidationMessageFor(m => m.EndDate)
+                            </div>
+                        </div>
+                    }
+                </div>
+            @*</div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>*@

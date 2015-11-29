@@ -1,0 +1,42 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model DocumentLibraryModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+}
+@Scripts.Render("~/bundles/documentlibrary") 
+<div id="placeHolderDocumentLibraries"></div>
+<div id="divDocumentLibraries" ng-controller="documentLibrariesController" ng-init="initialize('@canAdd','@canEdit','@canDelete')">
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh",CssClass="btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadDocumentLibraries()" });
+        if (canAdd)
+        {
+            pageButtons.Add(new PageButton { Id = "btnAdd",CssClass="btn btn-success", ButtonText = "Add Document Library", Icon = "plus", Method = "openDocumentLibrary(0)" });
+        }
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "DocumentLibraries", PageTitle = "Document Libraries", PageButtons = pageButtons })
+    <table style="width:100%" class="table table-striped table-bordered" id="tblDocumentLibraries" cellspacing="0">
+        <thead>
+            <tr>
+                @if (canAdd || canEdit || canDelete) // Contributor
+                {
+                    <th>Id #</th>
+                    <th style="width:350px">Document Library</th>
+                    <th>Active</th>
+                    <th>Action</th>
+                }
+                else
+                {
+                    <th style="width:80%">Document Library</th>
+                    <th>Action</th>
+                }
+            </tr>
+        </thead>
+    </table>
+</div>

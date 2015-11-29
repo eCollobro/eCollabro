@@ -1,0 +1,46 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model ImageModel
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/imagegallery")
+}
+<div id="divImageHome" ng-controller="imageGalleryHomeController" ng-init="initialize()">
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ImageHome", PageTitle = "Image Gallery" })
+
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Recent Images <span class="badge">{{recentImages.length}}</span></div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="image in recentImages">
+                        <h4 class="list-group-item-heading"><img src="/Content/ImageGallery/ImageThumbnail/{{image.ImageId}}" /> <a href="/Content/ImageGallery/image/{{image.ImageId}}">{{image.ImageTitle}}</a></h4>
+                        <p class="list-group-item-text"> {{image.ImageDescription}}</p>
+                    </li>
+                </ul>
+                <div ng-show="recentImages.length==0" class="text-info">There are no records to show.</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div style="min-height:40px" class="col-md-3">
+        <div class="row">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Image Galleries <span class="badge">{{imageGalleries.length}}</span></div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="imageGallery in imageGalleries">
+                            <span class="badge">{{imageGallery.NumberOfImages}}</span>
+                            <a href="/Content/ImageGallery/images/{{imageGallery.ImageGalleryId}}">{{imageGallery.ImageGalleryName}}</a>
+                        </li>
+                    </ul>
+                    <div ng-show="imageGalleries.length==0" class="text-info">There are no records to show.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

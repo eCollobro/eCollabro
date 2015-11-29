@@ -1,0 +1,101 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model DocumentModel
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/documentlibrary")
+}
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+
+    List<PageButton> pageButtons = new List<PageButton>();
+    pageButtons.Add(new PageButton { Id = "btnDocuments", ButtonText = "Documents", HideOnFooter=true, CssClass = "btn btn-success", Icon = "th-list", Method = "openDocuments(" + Model.DocumentLibraryId + ")" });
+    if ((canEdit && !Model.DocumentId.Equals(0)) || (canAdd && Model.DocumentId.Equals(0)))
+    {
+        pageButtons.Add(new PageButton { Id = "btnSave", ButtonText = "Save", CssClass = "btn btn-primary", Icon = "floppy-disk", Method = "saveDocument()" });
+    }
+}
+<div id="divDocument" ng-controller="documentController" ng-init="loadDocument(@Model.DocumentId,@Model.DocumentLibraryId)">
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "Document", PageTitle = "Document - Add/Edit", ValidateForm = true ,PageButtons=pageButtons})
+    @using (Html.BeginForm("ManageDocument", "DocumentLibrary", FormMethod.Post, new { role = "form", id = "frmDocument", @class = "form-horizontal", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.DocumentTitle, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.DocumentTitle, new { ng_model = "document.DocumentTitle", @class = "form-control", maxlength = "50" })
+                @Html.ValidationMessageFor(m => m.DocumentTitle)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DocumentDescription, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                @Html.TextAreaFor(m => m.DocumentDescription, new { ng_model = "document.DocumentDescription", @class = "form-control", maxlength = "255" })
+                @Html.HiddenFor(m => m.DocumentId, new { ng_model = "document.DocumentId" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DocumentLibraryId, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                <select data-ng-model="selectedDocumentLibrary" ng-options="documentLibrary.DocumentLibraryName for documentLibrary in documentLibraries" class="form-control" ng-change="updateDocumentLibrary()"></select>
+            </div>
+            @Html.HiddenFor(m => m.DocumentLibraryId)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.DocumentFile, new { @class = "col-md-2 control-label" })
+            <div class="col-md-5">
+                <input type="file" name="file" id="DocumentFile" />
+                @if (!Model.DocumentId.Equals(0))
+                {
+                    <a href="/Content/DocumentLibrary/Document/@Model.DocumentId" title="{{document.DocumentTitle}}" target="_blank">{{document.DocumentFileName}}</a>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.IsActive, new { ng_model = "document.IsActive" })
+                    @Html.LabelFor(m => m.IsActive)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Content Setting</div>
+                <div class="panel-body">
+                    <div class="form-group" style="padding-left:5px">
+                        <label class="checkbox-inline">
+                            @Html.CheckBoxFor(m => m.IsAnomynousAccess, new { ng_model = "document.IsAnomynousAccess" }) @Html.LabelFor(m => m.IsAnomynousAccess)
+                        </label>
+                        <label class="checkbox-inline">
+                            @Html.CheckBoxFor(m => m.IsCommentsAllowed, new { ng_model = "document.IsCommentsAllowed" }) @Html.LabelFor(m => m.IsCommentsAllowed)
+                        </label>
+                        <label class="checkbox-inline">
+                            @Html.CheckBoxFor(m => m.IsLikeAllowed, new { ng_model = "document.IsLikeAllowed" }) @Html.LabelFor(m => m.IsLikeAllowed)
+                        </label>
+                        <label class="checkbox-inline">
+                            @Html.CheckBoxFor(m => m.IsRatingAllowed, new { ng_model = "document.IsRatingAllowed" }) @Html.LabelFor(m => m.IsRatingAllowed)
+                        </label>
+                        <label class="checkbox-inline">
+                            @Html.CheckBoxFor(m => m.IsVotingAllowed, new { ng_model = "document.IsVotingAllowed" }) @Html.LabelFor(m => m.IsVotingAllowed)
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            @Html.Partial("_PageFooter", new PageFooterModel
+                {
+                    PageButtons = pageButtons
+                })
+        </div>
+    }
+</div>

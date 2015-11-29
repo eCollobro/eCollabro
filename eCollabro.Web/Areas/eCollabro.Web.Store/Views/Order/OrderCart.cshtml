@@ -1,0 +1,53 @@
+﻿@using eCollabro.Client.Models.Store;
+@using eCollabro.Client.Models.Core;
+@using System.Web.Optimization;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model OrderCartModel
+@Scripts.Render("~/bundles/order")
+<div id="placeHolderOrderCart"></div>
+<form name="frmOrderCart" id="frmOrderCart" ng-controller="orderCartController" ng-init="initialize()" novalidate>
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass = "btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadProducts()" });
+        pageButtons.Add(new PageButton { Id = "btnProductCategories", CssClass = "btn btn-success", ButtonText = "Product Categories", Icon = "th-list", Method = "productCategories()" });
+        pageButtons.Add(new PageButton { Id = "btnAdd", ButtonText = "Add Product", CssClass = "btn btn-success", Icon = "plus", Method = "openProductCategories()" });
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "OrderCart", PageTitle = "Order Cart", PageButtons = pageButtons })
+    <input name="txtQuantity1" type="number"  class="form-control" ng-model="orderCart.OrderAmount"  />
+    <span class="error" ng-show="frmOrderCart.txtQuantity1.$error.number">
+        Not valid number!
+    </span>
+    <table style="width:100%" class="table table-striped table-bordered" id="tblOrderCartItems" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Product Id #</th>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="orderCartItem in orderCart.OrderCartItems">
+            <td>{{orderCartItem.ProductId}}</td>
+            <td>{{orderCartItem.ProductTitle}}</td>
+            <td>
+                <ng-form name="fldQuantity">
+                    <input name="txtQuantity" type="number" min="1" max="99" required ng-minlength="" class="form-control" ng-model="orderCartItem.Quantity" />
+                    <span class="error" ng-show="!fldQuantity.txtQuantity.$valid">
+                        Please enter proper value for quantity!
+                    </span>
+                </ng-form>
+            </td>
+            <td style="text-align:right">{{orderCartItem.Amount|currency}}</td>
+            <td><a href="" ng-click="updateCartItem(orderCartItem)">Update</a> | <a href="" ng-click="deleteCartItem(orderCartItem)">Delete</a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total:</td>
+            <td style="text-align:right">{{orderCart.OrderAmount|currency}}</td>
+            <td></td>
+        </tr>
+    </table>
+</form>

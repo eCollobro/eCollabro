@@ -1,0 +1,71 @@
+﻿@using eCollabro.Client;
+@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model RoleFeaturesModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+}
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/role")
+}
+
+<div id="divRoleFeatures" ng-controller="roleFeaturesController" ng-init="loadRoleFeatures(@Model.RoleId)">
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass = "btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadRoleFeatures(" + Model.RoleId + ")" });
+        pageButtons.Add(new PageButton { Id = "btnRoles", CssClass = "btn btn-success", ButtonText = "Roles", Icon = "th-list", Method = "cancel()" });
+        if (canEdit)
+        {
+            pageButtons.Add(new PageButton { Id = "btnSubmit", ButtonText = "Save", Icon = "refresh", Method = "saveRoleFeatures()" });
+        }
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "RoleFeatures", PageTitle = "Role Features", PageButtons = pageButtons })
+    @Html.AntiForgeryToken()
+    <div class="form-group control-label">
+        @Html.LabelFor(m => m.RoleCode, new { @class = "col-md-2" })
+        {{roleFeatures.RoleCode}}
+    </div>
+    <div class="form-group control-label">
+        @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2" })
+        {{roleFeatures.RoleName}}
+    </div>
+
+    @using (Html.BeginForm("RoleFeatures", "security", FormMethod.Post, new { role = "form", id = "frmRoleFeatures", @class = "form-horizontal" }))
+    {
+        <div class="panel panel-primary" ng-repeat="module in roleFeatures.Features">
+            <!-- Default panel contents -->
+            <div class="panel-heading">{{module.ModuleName}}</div>
+            <div class="panel-body">
+                <p>{{module.ModuleDescription}}</p>
+                <hr />
+                <p class="text-primary">Features</p>
+                <div class="col-md-3" ng-repeat="feature in module.ModuleFeatures">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            <input type="checkbox" name="SelectedFeatures" ng-model="feature.IsSelected" />
+                            {{feature.FeatureName}}
+                        </div>
+                        <div class="panel-body">
+                            <ul ng-show="feature.IsSelected && feature.RoleFeaturePermissions.length>0">
+                                <li ng-repeat="permission in feature.RoleFeaturePermissions">
+                                    <input type="checkbox" name="SelectedPermissions" ng-model="permission.IsAssigned" />
+                                    {{permission.ContentPermissionName}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.Partial("_PageFooter", new PageFooterModel { PageButtons = pageButtons })
+            </div>
+        </div>
+    }
+</div>

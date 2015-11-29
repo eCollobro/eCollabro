@@ -1,0 +1,69 @@
+﻿@using eCollabro.Client.Models.Workflow;
+@using eCollabro.Client.Models.Core;
+*
+
+@using eCollabro.Web.Base;
+@model UserTaskModel
+@if (!Request.IsAjaxRequest())
+{
+    <script type="text/javascript" src="~/ViewScripts/Services/workflowService.js"></script>
+    <script type="text/javascript" src="~/ViewScripts/Workflow/userTask.js"></script>
+    <script type="text/javascript" src="~/ViewScripts/Workflow/workflowComments.js"></script>
+}
+<div id="divUserTask" ng-controller="userTaskController" ng-init="loadUserTask(@Model.TaskId)">
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "UserTask", PageTitle = "Task", ValidateForm = true })
+    @using (Html.BeginForm("UserTask", "UserTask", FormMethod.Post, new { role = "form", id = "frmUserTask" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Task Details</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.TaskTitle)
+                            <div>{{userTask.TaskTitle}}</div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.TaskDescription)
+                            <div>{{userTask.TaskDescription}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Currently Assigned To</label>
+                            <div>{{currentAssignedUser}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Status</label>
+                            <div>{{currentSelectedStatus.TaskStatus}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Action</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label> Assign to</label>
+                            @Html.TextBoxFor(m => m.AssignedUserName, new { ng_model = "userTask.AssignedUserName" ,@class="form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label> Change Status To </label>
+                            <select data-ng-model="selectedStatus" ng-options="allowedStatus.TaskStatus for allowedStatus in taskAllowedStatus" class="form-control" ng-change="updateTaskStatus()"></select>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" ng-click="saveUserTask()">Save</button>
+                            <button type="button" class="btn btn-default" onclick="javascript: location.href = '/workflow/UserTask/'">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    @* @Html.Partial("~/Views/Workflow/WorkflowComments.cshtml", new WorkflowCommentModel { Context = Model.Context, ContextId = Model.ContextId })*@
+</div>

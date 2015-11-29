@@ -1,0 +1,42 @@
+﻿<script type="text/javascript">
+    
+
+    //
+    // DataTables initialisation
+    //
+    $(document).ready(function () {
+      var oTable=  $('#example').dataTable({
+            "processing": true,
+            "serverSide": true,
+            aoColumns: [
+           { mDataProp: "RoleCode"}, 
+         { mDataProp: "RoleName", },
+         { mDataProp: "RoleDescription"}
+            ],
+            "ajax": $.fn.dataTable.pipeline({
+                url: '/securityapi/GetTestPageData',
+                pages: 5 // number of pages to cache
+            })
+        });
+        $('#example_filter input').unbind();
+        $('#example_filter input').bind('keyup', function (e) {
+            if (e.keyCode == 13)
+                oTable.fnFilter(this.value);
+        });
+
+    });
+        // property name and title example mDataProp: "RoleName", sTitle : "RoleName"
+  
+</script>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Role #</th>
+            <th></th>
+            <th></th>
+            @*<th>RoleCode</th>
+    <th>RoleName</th>
+    <th>RoleDescription</th>*@
+        </tr>
+    </thead>
+</table>

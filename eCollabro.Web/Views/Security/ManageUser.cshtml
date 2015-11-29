@@ -1,0 +1,130 @@
+﻿@using eCollabro.Client.Models.Core;
+@using eCollabro.Client.Models;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model UserModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+    bool canApprove = userPermissions.Contains(PermissionEnum.ApproveContent);
+}
+@if (!Request.IsAjaxRequest())
+{
+    @Scripts.Render("~/bundles/user")
+}
+<div id="divUser" ng-controller="userController" ng-init="initialize(@Model.UserId)">
+    @Html.Partial("~/Views/Account/ChangePassword.cshtml", new ChangePasswordModel())
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnUsers", ButtonText = "Users", HideOnFooter = true, CssClass = "btn btn-success", Icon = "th-list", Method = "openUsers()" });
+        if (canEdit && Model.UserId != 0)
+        {
+            pageButtons.Add(new PageButton { Id = "btnResetPasswprd", CssClass = "btn btn-danger", ButtonText = "Reset Password", Icon = "eye-close", Method = "resetPassword()", HideOnFooter = true });
+            pageButtons.Add(new PageButton { Id = "btnChangePassword", CssClass = "btn btn-warning", ButtonText = " Change Password", Icon = "eye-close", Method = "openChangePassword()", HideOnFooter = true });
+        }
+        if ((canEdit && !Model.UserId.Equals(0)) || (canAdd && Model.UserId.Equals(0)))
+        {
+            pageButtons.Add(new PageButton { Id = "btnSave", ButtonText = "Save", HideOnHeader = true, CssClass = "btn btn-primary", Icon = "floppy-disk", Method = "saveUser()" });
+        }
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "User", PageTitle = "User - Add/Edit", ValidateForm = true, PageButtons = pageButtons })
+    @using (Html.BeginForm("User", "Security", FormMethod.Post, new { User = "form", id = "frmUser", @class = "form-horizontal" }))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8">
+                    @if (Model.UserId != 0) // Edit Mode
+                    {
+                        @Html.TextBoxFor(m => m.UserName, new { ng_model = "user.UserName", @readonly = "readonly", @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.UserName, new { ng_model = "user.UserName", @class = "form-control" })
+                    }
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Email, new { ng_model = "user.Email", @class = "form-control", maxlength = "100" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 control-label"><label>Activation Status</label></div>
+                <div class="col-md-8">
+                    <label class="checkbox-inline">
+                        @Html.CheckBoxFor(m => m.IsActive, new { ng_model = "user.IsActive" }) @Html.LabelFor(m => m.IsActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserRoles, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8">
+                    <select multiple data-ng-model="user.UserRoles" ng-options="role.RoleName for role in activeRoles" class="form-control" id="UserRoles">
+                        <option value="">- Select -</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    @Html.Partial("_PageFooter", new PageFooterModel { PageButtons = pageButtons })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        if (Model.UserId != 0)
+        {
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        Account Status
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.CheckBoxFor(m => m.IsConfirmed, new { ng_model = "user.IsConfirmed", disabled = true }) @Html.LabelFor(m => m.IsConfirmed)
+                            </div>
+                            <div class="col-md-6">
+                                @if (canEdit)
+                                {
+                                    <button ng-show="!user.IsConfirmed" type="button" class="btn btn-primary btn-sm" ng-click="confirmUser()">Confirm</button>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.CheckBoxFor(m => m.IsApproved, new { ng_model = "user.IsApproved", disabled = true }) @Html.LabelFor(m => m.IsApproved)
+                            </div>
+                            <div class="col-md-6">
+                                @if (canApprove)
+                                {
+                                    <button type="button" ng-show="!user.IsApproved" class="btn btn-primary btn-sm" ng-click="approveUser()">Approve</button>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.CheckBoxFor(m => m.IsLocked, new { ng_model = "user.IsLocked", disabled = true }) @Html.LabelFor(m => m.IsLocked)
+                            </div>
+                            <div class="col-md-6">
+                                @if (canEdit)
+                                {
+                                    <button type="button" ng-show="user.IsLocked" class="btn btn-primary btn-sm" ng-click="unlockUser()">Unlock</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

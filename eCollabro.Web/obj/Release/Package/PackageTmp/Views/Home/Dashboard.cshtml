@@ -1,0 +1,30 @@
+﻿@using eCollabro.Web.Base;
+@using eCollabro.Client.Models.Core;
+@Scripts.Render("~/bundles/dashboard")
+<div id="divDashboard" ng-controller="dashboardController" ng-init="initialize()">
+    @Html.Partial("~/Views/Account/ChangePassword.cshtml")
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnManageProfile", CssClass="btn btn-success", ButtonText = " Manage Profile", Icon = "user", Method = "manageProfile()" });
+        pageButtons.Add(new PageButton { Id = "btnChangePassword", CssClass="btn btn-warning", ButtonText = " Change Password", Icon = "eye-close", Method = "openChangePassword()" });
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "Dashboard", PageTitle = "Dashboard", PageButtons = pageButtons })
+    @*<div class="row">
+           @Html.Partial("~/Areas/OTS/Views/ESB/DashboardWidget.cshtml")
+    </div>*@
+    <div class="col-md-4">
+        @Html.Partial("~/Views/Workflow/UserTasksDashboardWidget.cshtml")
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("~/Areas/Content/Views/Announcement/DashboardWidget.cshtml")
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("~/Areas/Content/Views/Blog/DashboardWidget.cshtml")
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("~/Areas/Content/Views/DocumentLibrary/DashboardWidget.cshtml")
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("~/Areas/Content/Views/ImageGallery/DashboardWidget.cshtml")
+    </div>
+ </div>

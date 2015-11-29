@@ -1,0 +1,50 @@
+﻿@using eCollabro.Client.Models;
+@using eCollabro.Client.Models.Core
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model NavigationModel
+@Scripts.Render("~/bundles/navigation")
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+
+    List<PageButton> pageButtons = new List<PageButton>();
+    pageButtons.Add(new PageButton { Id = "btnRefresh", ButtonText = "Refresh", CssClass = "btn btn-warning", Icon = "refresh", Method = "loadNavigations()" });
+    if (canAdd)
+    {
+        pageButtons.Add(new PageButton { Id = "btnAdd", ButtonText = "Add Navigation", CssClass = "btn btn-success", Icon = "plus", Method = "openNavigation(0)" });
+    }
+    var editCaption = "View";
+    if (canEdit)
+    {
+        editCaption = "Edit";
+    }
+}
+<div id="placeHolderNavigations"></div>
+<div id="divNavigations" ng-controller="navigationsController" ng-init="loadNavigations()">
+    <br />
+    @Html.Partial("_PanelHeader", new PageHeaderModel { PageTitle = "Navigations", ViewId = "Navigations", PageButtons = pageButtons })
+    <table class="tree table table-striped table-bordered" style="width:100%">
+        <tr>
+            <th style="width:300px">Navigation</th>
+            <th>Code</th>
+            <th>Type</th>
+            <th>Action</th>
+        </tr>
+        <tr ng-repeat="navigation in navigations" ng-class="getClass(navigation)" on-repeat-finished>
+            <td>{{navigation.NavigationText}}</td>
+            <td>{{navigation.NavigationCode}}</td>
+            <td>{{navigation.NavigationType}}</td>
+            <td>
+                <a ng-href="javascript:getNavigationsController().openNavigation({{navigation.NavigationId}})"> @editCaption</a>
+                @if(canDelete)
+                {
+                   <span> | </span> <a ng-href="javascript:getNavigationsController().deleteNavigation({{navigation.NavigationId}})">Delete</a>
+                }
+            </td>
+        </tr>
+    </table>
+    @Html.Partial("_PanelFooter", new PageFooterModel { PageButtons = pageButtons })
+</div>

@@ -1,0 +1,42 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@using eCollabro.Common;
+@model ImageGalleryModel
+@{
+    List<PermissionEnum> userPermissions = (List<PermissionEnum>)ViewBag.UserPermissions;
+    bool canEdit = userPermissions.Contains(PermissionEnum.EditContent);
+    bool canDelete = userPermissions.Contains(PermissionEnum.DeleteContent);
+    bool canAdd = userPermissions.Contains(PermissionEnum.AddContent);
+}
+@Scripts.Render("~/bundles/imagegallery")
+<div id="placeHolderImageGalleries"></div>
+<div id="divImageGalleries" ng-controller="imageGalleriesController" ng-init="initialize('@canAdd','@canEdit','@canDelete')">
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass="btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadImageGalleries()" });
+        if (canAdd)
+        {
+            pageButtons.Add(new PageButton { Id = "btnAdd", CssClass="btn btn-success", ButtonText = "Add Image Gallery", Icon = "plus", Method = "openImageGallery(0)" });
+        }
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ImageGalleries", PageTitle = "Image Galleries", PageButtons = pageButtons })
+    <table style="width:100%" class="table table-striped table-bordered" id="tblImageGalleries" cellspacing="0">
+        <thead>
+            <tr>
+                @if (canAdd || canEdit || canDelete) // Contributor
+                {
+                    <th>Id #</th>
+                    <th style="width:350px">Image Gallery</th>
+                    <th>Active</th>
+                    <th>Action</th>
+                }
+                else
+                {
+                    <th style="width:80%">Image Gallery</th>
+                    <th>Action</th>
+                }
+            </tr>
+        </thead>
+    </table>
+</div>

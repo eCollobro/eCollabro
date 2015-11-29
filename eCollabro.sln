@@ -1,0 +1,266 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{0D4D515D-0C57-4DE0-B568-79EE958D8E5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{51EBC8FD-F237-4626-A769-0BB921A64F8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F802DEBF-DEB6-41F6-875C-F053349CFEBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B9B74A4C-46FD-4E81-88F6-3E9E2A9BC9A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{D6FDC4F0-31E8-4994-8F6B-6B0878DDDEA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Web", "eCollabro.Web\eCollabro.Web.csproj", "{BB4C90F7-17C5-4964-906A-577050DEEB27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.BAL.Entities", "eCollabro.BAL.Entities\eCollabro.BAL.Entities.csproj", "{21167BDB-F3CC-4089-B2C4-7888CDB24D7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.DAL", "eCollabro.DAL\eCollabro.DAL.csproj", "{D0BD4E09-43B7-49DC-865A-85B00056FB20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.BAL", "eCollabro.BAL\eCollabro.BAL.csproj", "{1BE02F71-34A3-4940-B15B-508B40C36EB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{CA4ACB92-75E8-4D45-B511-87B5B1251E73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.DataMapper", "eCollabro.DataMapper\eCollabro.DataMapper.csproj", "{1CEDA2EF-F3DC-4D0C-992A-83AC8D1AA4A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Exceptions", "eCollabro.Exceptions\eCollabro.Exceptions.csproj", "{DA028BDD-9298-410A-AA18-0BC5A50FF7E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Utilities", "eCollabro.Utilities\eCollabro.Utilities.csproj", "{8571E151-67E5-49D0-9B5F-6EECB565F6E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Client.Models", "eCollabro.Client.Models\eCollabro.Client.Models.csproj", "{3817D4AC-AA4D-4D45-BA73-950A43116E37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Client.ServiceProxy", "eCollabro.Client.ServiceProxy\eCollabro.Client.ServiceProxy.csproj", "{989AEC9D-6925-4967-AD4B-C5428352B663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Client", "eCollabro.Client\eCollabro.Client.csproj", "{CFBBB615-A2F7-42E1-9A10-BDD272C90779}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Web.Base", "eCollabro.Web.Base\eCollabro.Web.Base.csproj", "{C9A47470-7B85-4E7F-9BD0-FDC9536D9BCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Service.DataContracts", "eCollabro.Service.DataContracts\eCollabro.Service.DataContracts.csproj", "{90F35875-7840-4A77-9BFB-F9B577176792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Service", "eCollabro.Service\eCollabro.Service.csproj", "{DCBD36F3-C774-4B9E-8F53-FED882BDC03F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Service.Host", "eCollabro.Service.Host\eCollabro.Service.Host.csproj", "{30F69D1D-8B3B-4A3F-B796-3D7A517CA9A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.ServiceHost.Console", "eCollabro.ServiceHost.Console\eCollabro.ServiceHost.Console.csproj", "{51835972-8CFB-441C-BFDF-ADF036113B93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{D495C889-C003-486A-9732-E678D3324C1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Web.Tests", "eCollabro.Web.Tests\eCollabro.Web.Tests.csproj", "{299C482F-BB80-4CD2-BF0C-6A3ED658E133}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Service.UnitTest", "eCollabro.Service.UnitTest\eCollabro.Service.UnitTest.csproj", "{CCFF53A3-48C0-4F4F-BDA0-09C442AFF615}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Common", "eCollabro.Common\eCollabro.Common.csproj", "{A23607A1-3360-4317-BA5F-5926F7B4DF6B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E1B858A4-2FE4-4DA6-9598-5775BE32C914}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Resources", "eCollabro.Resources\eCollabro.Resources.csproj", "{CFB0B314-E043-4480-B749-BDF3056A8CA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89DA351B-B2A8-44B2-ADA1-05C61D55D178}"
+	ProjectSection(SolutionItems) = preProject
+		packages\YUICompressor.NET.MSBuild.2.4.0.0\Samples\YUICompressor\MSBuild.proj = packages\YUICompressor.NET.MSBuild.2.4.0.0\Samples\YUICompressor\MSBuild.proj
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eCollabro.Service.ServiceContracts", "eCollabro.Service.ServiceContracts\eCollabro.Service.ServiceContracts.csproj", "{4D6665DE-C2AA-45F6-AEB2-1462721C0C44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB4C90F7-17C5-4964-906A-577050DEEB27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB4C90F7-17C5-4964-906A-577050DEEB27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB4C90F7-17C5-4964-906A-577050DEEB27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB4C90F7-17C5-4964-906A-577050DEEB27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21167BDB-F3CC-4089-B2C4-7888CDB24D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21167BDB-F3CC-4089-B2C4-7888CDB24D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21167BDB-F3CC-4089-B2C4-7888CDB24D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21167BDB-F3CC-4089-B2C4-7888CDB24D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0BD4E09-43B7-49DC-865A-85B00056FB20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0BD4E09-43B7-49DC-865A-85B00056FB20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0BD4E09-43B7-49DC-865A-85B00056FB20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0BD4E09-43B7-49DC-865A-85B00056FB20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BE02F71-34A3-4940-B15B-508B40C36EB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BE02F71-34A3-4940-B15B-508B40C36EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BE02F71-34A3-4940-B15B-508B40C36EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BE02F71-34A3-4940-B15B-508B40C36EB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CEDA2EF-F3DC-4D0C-992A-83AC8D1AA4A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CEDA2EF-F3DC-4D0C-992A-83AC8D1AA4A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CEDA2EF-F3DC-4D0C-992A-83AC8D1AA4A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CEDA2EF-F3DC-4D0C-992A-83AC8D1AA4A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA028BDD-9298-410A-AA18-0BC5A50FF7E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA028BDD-9298-410A-AA18-0BC5A50FF7E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA028BDD-9298-410A-AA18-0BC5A50FF7E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA028BDD-9298-410A-AA18-0BC5A50FF7E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8571E151-67E5-49D0-9B5F-6EECB565F6E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8571E151-67E5-49D0-9B5F-6EECB565F6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8571E151-67E5-49D0-9B5F-6EECB565F6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8571E151-67E5-49D0-9B5F-6EECB565F6E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3817D4AC-AA4D-4D45-BA73-950A43116E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3817D4AC-AA4D-4D45-BA73-950A43116E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3817D4AC-AA4D-4D45-BA73-950A43116E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3817D4AC-AA4D-4D45-BA73-950A43116E37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989AEC9D-6925-4967-AD4B-C5428352B663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989AEC9D-6925-4967-AD4B-C5428352B663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989AEC9D-6925-4967-AD4B-C5428352B663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989AEC9D-6925-4967-AD4B-C5428352B663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFBBB615-A2F7-42E1-9A10-BDD272C90779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFBBB615-A2F7-42E1-9A10-BDD272C90779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFBBB615-A2F7-42E1-9A10-BDD272C90779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFBBB615-A2F7-42E1-9A10-BDD272C90779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9A47470-7B85-4E7F-9BD0-FDC9536D9BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9A47470-7B85-4E7F-9BD0-FDC9536D9BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9A47470-7B85-4E7F-9BD0-FDC9536D9BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9A47470-7B85-4E7F-9BD0-FDC9536D9BCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F35875-7840-4A77-9BFB-F9B577176792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F35875-7840-4A77-9BFB-F9B577176792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F35875-7840-4A77-9BFB-F9B577176792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F35875-7840-4A77-9BFB-F9B577176792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCBD36F3-C774-4B9E-8F53-FED882BDC03F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCBD36F3-C774-4B9E-8F53-FED882BDC03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCBD36F3-C774-4B9E-8F53-FED882BDC03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCBD36F3-C774-4B9E-8F53-FED882BDC03F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30F69D1D-8B3B-4A3F-B796-3D7A517CA9A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30F69D1D-8B3B-4A3F-B796-3D7A517CA9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30F69D1D-8B3B-4A3F-B796-3D7A517CA9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30F69D1D-8B3B-4A3F-B796-3D7A517CA9A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51835972-8CFB-441C-BFDF-ADF036113B93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51835972-8CFB-441C-BFDF-ADF036113B93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51835972-8CFB-441C-BFDF-ADF036113B93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51835972-8CFB-441C-BFDF-ADF036113B93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{299C482F-BB80-4CD2-BF0C-6A3ED658E133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{299C482F-BB80-4CD2-BF0C-6A3ED658E133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{299C482F-BB80-4CD2-BF0C-6A3ED658E133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{299C482F-BB80-4CD2-BF0C-6A3ED658E133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCFF53A3-48C0-4F4F-BDA0-09C442AFF615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFF53A3-48C0-4F4F-BDA0-09C442AFF615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCFF53A3-48C0-4F4F-BDA0-09C442AFF615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCFF53A3-48C0-4F4F-BDA0-09C442AFF615}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23607A1-3360-4317-BA5F-5926F7B4DF6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23607A1-3360-4317-BA5F-5926F7B4DF6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23607A1-3360-4317-BA5F-5926F7B4DF6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23607A1-3360-4317-BA5F-5926F7B4DF6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB0B314-E043-4480-B749-BDF3056A8CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB0B314-E043-4480-B749-BDF3056A8CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB0B314-E043-4480-B749-BDF3056A8CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB0B314-E043-4480-B749-BDF3056A8CA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D6665DE-C2AA-45F6-AEB2-1462721C0C44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D6665DE-C2AA-45F6-AEB2-1462721C0C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D6665DE-C2AA-45F6-AEB2-1462721C0C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D6665DE-C2AA-45F6-AEB2-1462721C0C44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B9B74A4C-46FD-4E81-88F6-3E9E2A9BC9A0} = {F802DEBF-DEB6-41F6-875C-F053349CFEBC}
+		{BB4C90F7-17C5-4964-906A-577050DEEB27} = {B9B74A4C-46FD-4E81-88F6-3E9E2A9BC9A0}
+		{21167BDB-F3CC-4089-B2C4-7888CDB24D7D} = {0D4D515D-0C57-4DE0-B568-79EE958D8E5D}
+		{D0BD4E09-43B7-49DC-865A-85B00056FB20} = {0D4D515D-0C57-4DE0-B568-79EE958D8E5D}
+		{1BE02F71-34A3-4940-B15B-508B40C36EB4} = {0D4D515D-0C57-4DE0-B568-79EE958D8E5D}
+		{1CEDA2EF-F3DC-4D0C-992A-83AC8D1AA4A0} = {CA4ACB92-75E8-4D45-B511-87B5B1251E73}
+		{DA028BDD-9298-410A-AA18-0BC5A50FF7E0} = {CA4ACB92-75E8-4D45-B511-87B5B1251E73}
+		{8571E151-67E5-49D0-9B5F-6EECB565F6E3} = {CA4ACB92-75E8-4D45-B511-87B5B1251E73}
+		{3817D4AC-AA4D-4D45-BA73-950A43116E37} = {D6FDC4F0-31E8-4994-8F6B-6B0878DDDEA7}
+		{989AEC9D-6925-4967-AD4B-C5428352B663} = {D6FDC4F0-31E8-4994-8F6B-6B0878DDDEA7}
+		{CFBBB615-A2F7-42E1-9A10-BDD272C90779} = {D6FDC4F0-31E8-4994-8F6B-6B0878DDDEA7}
+		{C9A47470-7B85-4E7F-9BD0-FDC9536D9BCE} = {CA4ACB92-75E8-4D45-B511-87B5B1251E73}
+		{90F35875-7840-4A77-9BFB-F9B577176792} = {51EBC8FD-F237-4626-A769-0BB921A64F8F}
+		{DCBD36F3-C774-4B9E-8F53-FED882BDC03F} = {51EBC8FD-F237-4626-A769-0BB921A64F8F}
+		{30F69D1D-8B3B-4A3F-B796-3D7A517CA9A1} = {51EBC8FD-F237-4626-A769-0BB921A64F8F}
+		{51835972-8CFB-441C-BFDF-ADF036113B93} = {51EBC8FD-F237-4626-A769-0BB921A64F8F}
+		{299C482F-BB80-4CD2-BF0C-6A3ED658E133} = {D495C889-C003-486A-9732-E678D3324C1B}
+		{CCFF53A3-48C0-4F4F-BDA0-09C442AFF615} = {D495C889-C003-486A-9732-E678D3324C1B}
+		{A23607A1-3360-4317-BA5F-5926F7B4DF6B} = {E1B858A4-2FE4-4DA6-9598-5775BE32C914}
+		{CFB0B314-E043-4480-B749-BDF3056A8CA8} = {E1B858A4-2FE4-4DA6-9598-5775BE32C914}
+		{4D6665DE-C2AA-45F6-AEB2-1462721C0C44} = {51EBC8FD-F237-4626-A769-0BB921A64F8F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 21
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://vserv.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = eCollabro.BAL.Entities\\eCollabro.BAL.Entities.csproj
+		SccProjectTopLevelParentUniqueName1 = eCollabro.sln
+		SccProjectName1 = eCollabro.BAL.Entities
+		SccLocalPath1 = eCollabro.BAL.Entities
+		SccProjectUniqueName2 = eCollabro.BAL\\eCollabro.BAL.csproj
+		SccProjectTopLevelParentUniqueName2 = eCollabro.sln
+		SccProjectName2 = eCollabro.BAL
+		SccLocalPath2 = eCollabro.BAL
+		SccProjectUniqueName3 = eCollabro.Client.Models\\eCollabro.Client.Models.csproj
+		SccProjectTopLevelParentUniqueName3 = eCollabro.sln
+		SccProjectName3 = eCollabro.Client.Models
+		SccLocalPath3 = eCollabro.Client.Models
+		SccProjectUniqueName4 = eCollabro.Client.ServiceProxy\\eCollabro.Client.ServiceProxy.csproj
+		SccProjectTopLevelParentUniqueName4 = eCollabro.sln
+		SccProjectName4 = eCollabro.Client.ServiceProxy
+		SccLocalPath4 = eCollabro.Client.ServiceProxy
+		SccProjectUniqueName5 = eCollabro.Client\\eCollabro.Client.csproj
+		SccProjectTopLevelParentUniqueName5 = eCollabro.sln
+		SccProjectName5 = eCollabro.Client
+		SccLocalPath5 = eCollabro.Client
+		SccProjectUniqueName6 = eCollabro.Common\\eCollabro.Common.csproj
+		SccProjectTopLevelParentUniqueName6 = eCollabro.sln
+		SccProjectName6 = eCollabro.Common
+		SccLocalPath6 = eCollabro.Common
+		SccProjectUniqueName7 = eCollabro.DAL\\eCollabro.DAL.csproj
+		SccProjectTopLevelParentUniqueName7 = eCollabro.sln
+		SccProjectName7 = eCollabro.DAL
+		SccLocalPath7 = eCollabro.DAL
+		SccProjectUniqueName8 = eCollabro.DataMapper\\eCollabro.DataMapper.csproj
+		SccProjectTopLevelParentUniqueName8 = eCollabro.sln
+		SccProjectName8 = eCollabro.DataMapper
+		SccLocalPath8 = eCollabro.DataMapper
+		SccProjectUniqueName9 = eCollabro.Exceptions\\eCollabro.Exceptions.csproj
+		SccProjectTopLevelParentUniqueName9 = eCollabro.sln
+		SccProjectName9 = eCollabro.Exceptions
+		SccLocalPath9 = eCollabro.Exceptions
+		SccProjectUniqueName10 = eCollabro.Resources\\eCollabro.Resources.csproj
+		SccProjectTopLevelParentUniqueName10 = eCollabro.sln
+		SccProjectName10 = eCollabro.Resources
+		SccLocalPath10 = eCollabro.Resources
+		SccProjectUniqueName11 = eCollabro.Service.DataContracts\\eCollabro.Service.DataContracts.csproj
+		SccProjectTopLevelParentUniqueName11 = eCollabro.sln
+		SccProjectName11 = eCollabro.Service.DataContracts
+		SccLocalPath11 = eCollabro.Service.DataContracts
+		SccProjectUniqueName12 = eCollabro.Service.Host\\eCollabro.Service.Host.csproj
+		SccProjectTopLevelParentUniqueName12 = eCollabro.sln
+		SccProjectName12 = eCollabro.Service.Host
+		SccLocalPath12 = eCollabro.Service.Host
+		SccProjectUniqueName13 = eCollabro.Service.ServiceContracts\\eCollabro.Service.ServiceContracts.csproj
+		SccProjectTopLevelParentUniqueName13 = eCollabro.sln
+		SccProjectName13 = eCollabro.Service.ServiceContracts
+		SccLocalPath13 = eCollabro.Service.ServiceContracts
+		SccProjectUniqueName14 = eCollabro.Service.UnitTest\\eCollabro.Service.UnitTest.csproj
+		SccProjectTopLevelParentUniqueName14 = eCollabro.sln
+		SccProjectName14 = eCollabro.Service.UnitTest
+		SccLocalPath14 = eCollabro.Service.UnitTest
+		SccProjectUniqueName15 = eCollabro.Service\\eCollabro.Service.csproj
+		SccProjectTopLevelParentUniqueName15 = eCollabro.sln
+		SccProjectName15 = eCollabro.Service
+		SccLocalPath15 = eCollabro.Service
+		SccProjectUniqueName16 = eCollabro.ServiceHost.Console\\eCollabro.ServiceHost.Console.csproj
+		SccProjectTopLevelParentUniqueName16 = eCollabro.sln
+		SccProjectName16 = eCollabro.ServiceHost.Console
+		SccLocalPath16 = eCollabro.ServiceHost.Console
+		SccProjectUniqueName17 = eCollabro.Utilities\\eCollabro.Utilities.csproj
+		SccProjectTopLevelParentUniqueName17 = eCollabro.sln
+		SccProjectName17 = eCollabro.Utilities
+		SccLocalPath17 = eCollabro.Utilities
+		SccProjectUniqueName18 = eCollabro.Web.Base\\eCollabro.Web.Base.csproj
+		SccProjectTopLevelParentUniqueName18 = eCollabro.sln
+		SccProjectName18 = eCollabro.Web.Base
+		SccLocalPath18 = eCollabro.Web.Base
+		SccProjectUniqueName19 = eCollabro.Web.Tests\\eCollabro.Web.Tests.csproj
+		SccProjectTopLevelParentUniqueName19 = eCollabro.sln
+		SccProjectName19 = eCollabro.Web.Tests
+		SccLocalPath19 = eCollabro.Web.Tests
+		SccProjectUniqueName20 = eCollabro.Web\\eCollabro.Web.csproj
+		SccProjectTopLevelParentUniqueName20 = eCollabro.sln
+		SccProjectName20 = eCollabro.Web
+		SccLocalPath20 = eCollabro.Web
+	EndGlobalSection
+EndGlobal

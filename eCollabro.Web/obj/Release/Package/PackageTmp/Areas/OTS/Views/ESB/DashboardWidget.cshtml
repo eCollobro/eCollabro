@@ -1,0 +1,32 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model BlogModel
+<div id="divESBHome" ng-controller="esbDashboardWidgetController" ng-init="initialize()">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">ESB Apps </div>
+        <div class="panel-body">
+            <div id="divSummaryMessageESBWidget"></div>
+            <div id="placeholderAppScheduler"></div>
+            <div class="row" id="divAppSchedulerMain">
+
+                <table style="width:100%" class="table table-striped table-bordered" id="tblESBApps" cellspacing="0">
+                    <thead>
+                        <tr>
+
+                            <th>Id #</th>
+                            <th style="width:350px">App</th>
+                            <th>Active</th>
+                            <th>Status</th>
+                            <th>External</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer"><a href="/content/blog/">Blog Home</a> | <a href="/content/blog/blogcategories">Blog Categories</a></div>
+    </div>
+    
+</div>

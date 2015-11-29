@@ -1,0 +1,27 @@
+﻿@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model SiteCollectionAdminModel
+<script type="text/javascript" src="~/app/controllers/setup/siteCollectionAdmin.js"></script>
+<div id="divSiteCollectionAdmin" ng-controller="siteCollectionAdminController" ng-init="initialize()">
+    @Html.Partial("~/Views/Setup/AddSiteCollectionAdmin.cshtml")
+    @{
+        List<PageButton> pageButtons = new List<PageButton>();
+        pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass = "btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "initialize()" });
+        pageButtons.Add(new PageButton { Id = "btnAdd", CssClass="btn btn-success", ButtonText = "Add", Icon = "plus", Method = "addSiteCollectionAdmin()" });
+    }
+    @Html.Partial("_PageHeader", new PageHeaderModel { PageTitle = "Site Collection Admin", ViewId = "SiteCollectionAdmin", PageButtons = pageButtons })
+    <table style="width:100%" class="table table-striped table-bordered" id="tblRoles" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="siteCollectionAdmin in siteCollectionAdmins">
+                <td>{{siteCollectionAdmin.UserName}}</td>
+                <td>{{siteCollectionAdmin.Email}}</td>
+                <td><a href="#" ng-click="deleteSiteCollectionAdmin(siteCollectionAdmin)">Delete</a></td>
+            </tr>
+        </thead>
+    </table>
+</div>

@@ -1,0 +1,55 @@
+﻿@using eCollabro.Client.Models.Content;
+@using eCollabro.Client.Models.Core;
+@using eCollabro.Web.Base;
+@model ContentCommentModel
+@if (!Request.IsAjaxRequest())
+{
+    <script type="text/javascript" src="~/Areas/Content/app/controllers/contentComment/contentComments.js"></script>
+}
+<hr />
+<div id="divContentComments" ng-controller="contentCommentsController" ng-init="Initialize('@Model.ContextId',@Model.ContextContentId)">
+    <div style="text-align:right;width:100%">
+        <div class="col-md-6"></div>
+        <div ng-show="isLikeAllowed" class="col-md-2"> Likes <span class="badge">{{contentCommentsData.NumberOfLikes}}</span> <button ng-click="setLikeDislike()" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button> </div>
+        <div ng-show="isVotingAllowed" class="col-md-2"> Votes <span class="badge">{{contentCommentsData.NumberOfVotes}}</span> <button ng-click="setVote()" class="btn btn-default"><span class="glyphicon glyphicon-check"></span> Vote</button></div>
+        <div ng-show="isRatingAllowed" class="col-md-2"> Rating <span class="badge">{{contentCommentsData.AverageRatings}}</span> 
+            <select data-ng-model="userRating" ng-change="setRating()" class="btn btn-default">
+                <option value="0">None</option>
+                <option value="1">1</option>                 
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select> 
+        </div>
+    </div>
+    <div ng-show="isCommentAllowed" class="row col-md-12">
+        @{
+            List<PageButton> pageButtons = new List<PageButton>();
+            pageButtons.Add(new PageButton { Id = "btnRefresh", CssClass = "btn btn-warning", ButtonText = "Refresh", Icon = "refresh", Method = "loadComments()" });
+            pageButtons.Add(new PageButton { Id = "btnAdd", CssClass = "btn btn-success", ButtonText = "Add Comment", Icon = "plus", Method = "addComment()" });
+        }
+        @Html.Partial("_PageHeader", new PageHeaderModel { ViewId = "ContentComments", PageTitle = "Comments", PageButtons = pageButtons })
+        <div class="modal fade" id="dlgAddComment">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Add Comments</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="divAddCommentModalSummary"></div>
+                        <textarea class="form-control" rows="4" cols="200" id="txtComments"></textarea>
+                        <input type="hidden" id="hdnCurrentNode" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="javascript: getContentCommentsController().saveComment();">Save</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div id="divSummaryMessageAddContent"></div>
+        <div id="placeHolderContentComments"></div>
+    </div>
+</div>
