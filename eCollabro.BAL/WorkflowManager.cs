@@ -35,7 +35,7 @@ namespace eCollabro.BAL
         public IWorkflowEventHandler WorkFlowEventHandler(ContextEnum context)
         {
             IWorkflowEventHandler workflowEventHandler = null;
-            if (context.Equals(ContextEnum.Blog) || context.Equals(ContextEnum.Document) || context.Equals(ContextEnum.Image) || context.Equals(ContextEnum.ContentPage) || context.Equals(ContextEnum.Product))
+            if (context.Equals(ContextEnum.Blog) || context.Equals(ContextEnum.Document) || context.Equals(ContextEnum.Image) || context.Equals(ContextEnum.ContentPage))
             {
                 workflowEventHandler = new ContentManager();
             }
