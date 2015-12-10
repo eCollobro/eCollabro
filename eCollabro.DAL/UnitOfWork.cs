@@ -10,7 +10,6 @@ using System.Collections;
 using System.Data.Entity;
 using eCollabro.BAL.Entities.Models;
 using eCollabro.DAL.Interface;
-using eCollabro.BAL.Entities.ADPModel;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 
@@ -38,8 +37,8 @@ namespace eCollabro.DAL
         {
             if (dbConnectionParameter == DbConnectionParameter.eCollabro)
                 _context = new eCollabroDbModel();
-            else if (dbConnectionParameter == DbConnectionParameter.ADP)
-                _context = new ADPModel();
+            //else if (dbConnectionParameter == DbConnectionParameter.ADP)
+            //    _context = new ADPModel();
             _context.Configuration.LazyLoadingEnabled = false;
             _instanceId = Guid.NewGuid();
         }
